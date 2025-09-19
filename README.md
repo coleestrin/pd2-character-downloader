@@ -9,7 +9,7 @@ Built from [BetweenWall's](https://github.com/BetweenWalls) [PD2 Converter](http
 3. `dotnet run` to run or `dotnet build` to build.
 
 ## Contributing / Feedback
-If you run into issues you can either open a Github issue here or join the [pd2.tools](https://discord.com/invite/TVTExqWRhK) discord and post it in #bug-reports.
+If you run into issues you can either open a Github issue here or join the [pd2.tools discord](https://discord.com/invite/TVTExqWRhK) and post it in the #bug-report channel.
 
 Contributions are welcome, feel free to make a PR.
 

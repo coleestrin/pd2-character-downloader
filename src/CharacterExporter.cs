@@ -104,12 +104,11 @@ namespace D2SLib
                 // Fill with rejuvs and stash items
                 _inventoryService.FillInventoryAndStash(character);
 
-                // Handle merc
-                //Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(apiCharacterData.Mercenary));
-                /*if (apiCharacterData.Mercenary?.Items?.Count > 0)
+                // Handle mercenary
+                if (apiCharacterData.Mercenary?.Items?.Count > 0)
                 {
                     _characterService.ApplyMercenaryData(character, apiCharacterData.Mercenary);
-                }*/
+                }
 
                 // Validate character
                 ValidateCharacterData(character);

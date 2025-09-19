@@ -127,23 +127,31 @@ namespace D2SLib.Services
                     break;
 
                 case "lightmindam":
+                case "lightdam":
                     AddElementalDamage(item, "light", modifier.Values);
                     break;
 
                 case "coldmindam":
+                case "colddam":
                     AddColdDamage(item, modifier.Values);
                     break;
 
                 case "firemindam":
+                case "firedam":
                     AddFireDamage(item, modifier.Values);
                     break;
 
                 case "poisonmindam":
+                case "poisondam":
                     AddPoisonDamage(item, modifier.Values);
                     break;
 
+
                 case "item_skillonhit":
-                    AddSkillOnHit(item, modifier.Values);
+                case "item_skilloncast":
+                case "item_skillonlevelup":
+                case "item_skillondeath":
+                    AddSkillOnHit(item, modifier.Values, modifier.Name);
                     break;
 
                 case "all_resist":
@@ -179,6 +187,11 @@ namespace D2SLib.Services
                 item.StatLists[0].Stats.Add(new ItemStat { Stat = $"{element}mindam", Value = (int)values[0] });
                 item.StatLists[0].Stats.Add(new ItemStat { Stat = $"{element}maxdam", Value = (int)values[1] });
             }
+            else if (values.Count == 1)
+            {
+                item.StatLists[0].Stats.Add(new ItemStat { Stat = $"{element}mindam", Value = 1 });
+                item.StatLists[0].Stats.Add(new ItemStat { Stat = $"{element}maxdam", Value = (int)values[0] });
+            }
         }
 
         private void AddColdDamage(Item item, List<float> values)
@@ -189,6 +202,16 @@ namespace D2SLib.Services
                 item.StatLists[0].Stats.Add(new ItemStat { Stat = "coldmaxdam", Value = (int)values[1] });
                 item.StatLists[0].Stats.Add(new ItemStat { Stat = "coldlength", Value = (int)values[2] });
             }
+            else if (values.Count >= 2)
+            {
+                item.StatLists[0].Stats.Add(new ItemStat { Stat = "coldmindam", Value = (int)values[0] });
+                item.StatLists[0].Stats.Add(new ItemStat { Stat = "coldmaxdam", Value = (int)values[1] });
+            }
+            else if (values.Count == 1)
+            {
+                item.StatLists[0].Stats.Add(new ItemStat { Stat = "coldmindam", Value = 1 });
+                item.StatLists[0].Stats.Add(new ItemStat { Stat = "coldmaxdam", Value = (int)values[0] });
+            }
         }
 
         private void AddFireDamage(Item item, List<float> values)
@@ -197,6 +220,11 @@ namespace D2SLib.Services
             {
                 item.StatLists[0].Stats.Add(new ItemStat { Stat = "firemindam", Value = (int)values[0] });
                 item.StatLists[0].Stats.Add(new ItemStat { Stat = "firemaxdam", Value = (int)values[1] });
+            }
+            else if (values.Count == 1)
+            {
+                item.StatLists[0].Stats.Add(new ItemStat { Stat = "firemindam", Value = 1 });
+                item.StatLists[0].Stats.Add(new ItemStat { Stat = "firemaxdam", Value = (int)values[0] });
             }
         }
 
@@ -208,15 +236,25 @@ namespace D2SLib.Services
                 item.StatLists[0].Stats.Add(new ItemStat { Stat = "poisonmaxdam", Value = (int)values[1] });
                 item.StatLists[0].Stats.Add(new ItemStat { Stat = "poisonlength", Value = (int)values[2] });
             }
+            else if (values.Count >= 2)
+            {
+                item.StatLists[0].Stats.Add(new ItemStat { Stat = "poisonmindam", Value = (int)values[0] });
+                item.StatLists[0].Stats.Add(new ItemStat { Stat = "poisonmaxdam", Value = (int)values[1] });
+            }
+            else if (values.Count == 1)
+            {
+                item.StatLists[0].Stats.Add(new ItemStat { Stat = "poisonmindam", Value = 1 });
+                item.StatLists[0].Stats.Add(new ItemStat { Stat = "poisonmaxdam", Value = (int)values[0] });
+            }
         }
 
-        private void AddSkillOnHit(Item item, List<float> values)
+        private void AddSkillOnHit(Item item, List<float> values, string modifierName)
         {
             if (values.Count >= 3)
             {
                 item.StatLists[0].Stats.Add(new ItemStat
                 {
-                    Stat = "item_skillonhit",
+                    Stat = modifierName,
                     SkillLevel = (int)values[0],
                     SkillId = (int)values[1],
                     Value = (int)values[2]
@@ -285,6 +323,7 @@ namespace D2SLib.Services
                 });
             }
         }
+
 
         private void AddGenericModifier(Item item, D2ItemModifier modifier)
         {

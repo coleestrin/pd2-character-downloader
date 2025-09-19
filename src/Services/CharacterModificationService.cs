@@ -205,11 +205,16 @@ namespace D2SLib.Services
         {
             foreach (var apiItem in items)
             {
-                var item = _itemCreationService.CreateItemFromApiData(apiItem);
-                if (item != null && ShouldIncludeItem(apiItem))
+                if ((apiItem.Location.EquipmentId <= 0 || apiItem.Location.Zone != "Equipped") && !apiItem.Base.Id.StartsWith("cm"))
                 {
-                    character.MercenaryItemList.ItemList.Items.Add(item);
+                    continue; 
+                }
+
+                var item = _itemCreationService.CreateItemFromApiData(apiItem);
+                if (item != null)
+                {
                     character.MercenaryItemList.ItemList.Count++;
+                    character.MercenaryItemList.ItemList.Items.Add(item);
                 }
             }
         }

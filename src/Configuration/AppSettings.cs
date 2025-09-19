@@ -8,9 +8,9 @@ namespace D2SLib.Configuration
             .GetParent(System.Environment.CurrentDirectory)
             .Parent.FullName;
 
-        public static readonly string TextDir = Path.Combine(ProjectDirectory, "pd2-char-exporter", "src", "main", "TEXT");
-        public static readonly string InputDir = Path.Combine(ProjectDirectory, "pd2-char-exporter", "src", "main", "input");
-        public static readonly string OutputDir = Path.Combine(ProjectDirectory, "pd2-char-exporter", "src", "main", "output");
+        public static readonly string TextDir = Path.Combine(ProjectDirectory, "pd2-character-downloader", "src", "main", "TEXT");
+        public static readonly string InputDir = Path.Combine(ProjectDirectory, "pd2-character-downloader", "src", "main", "input");
+        public static readonly string OutputDir = Path.Combine(ProjectDirectory, "pd2-character-downloader", "src", "main", "output");
 
         public const string CharacterFileExtension = ".d2s";
         public const string ApiBaseUrl = "https://api.projectdiablo2.com/game/character/";
