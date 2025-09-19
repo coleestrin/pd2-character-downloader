@@ -15,51 +15,6 @@ namespace D2SLib.Services
             _itemCreationService = itemCreationService ?? throw new System.ArgumentNullException(nameof(itemCreationService));
         }
 
-        /*public void ApplyCharacterData(D2S character, CharacterData apiData)
-        {
-
-            character.Level = (byte)apiData.Character.Level;
-            character.Name = apiData.Character.Name;
-
-
-            if (character.Attributes?.Stats != null)
-            {
-                character.Attributes.Stats["level"] = apiData.Character.Level;
-                character.Attributes.Stats["experience"] = (int)apiData.Character.Experience;
-
-                if (apiData.Character.Attributes != null)
-                {
-                    try
-                    {
-                        character.Attributes.Stats["vitality"] = apiData.Character.Attributes.Vitality;
-                        character.Attributes.Stats["strength"] = apiData.Character.Attributes.Strength;
-                        character.Attributes.Stats["energy"] = apiData.Character.Attributes.Energy;
-                        character.Attributes.Stats["dexterity"] = apiData.Character.Attributes.Dexterity;
-                        character.Attributes.Stats["hitpoints"] = apiData.Character.Life;
-                        character.Attributes.Stats["maxhp"] = apiData.Character.Life;
-                        character.Attributes.Stats["mana"] = apiData.Character.Mana;
-                        character.Attributes.Stats["maxmana"] = apiData.Character.Mana;
-                    }
-                    catch (Exception)
-                    {
-                        throw;
-                    }
-                }
-            }
-
-            if (apiData.Character.Status.IsHardcore)
-            {
-                character.Status.IsHardcore = true;
-            }
-
-            ApplySkills(character, apiData.Character.Skills);
-
-            if (apiData.Mercenary?.Items?.Count > 0)
-            {
-                ApplyMercenaryData(character, apiData.Mercenary);
-            }
-        }*/
-
         public void CompleteAllQuests(D2S character)
         {
             var difficulties = new[]

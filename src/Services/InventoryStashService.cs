@@ -40,6 +40,21 @@ namespace D2SLib.Services
                     AddItem(character, (byte)col, (byte)row, AppSettings.InventoryPage, "rvl", 1);
                 }
             }
+
+            // Fill belt with rejuvenation potions (16 slots)
+            for (int i = 0; i < 16; i++)
+            {
+                AddItem(character, (byte)i, 0, 0, "rvl", 1, true); // true = belt
+            }
+
+            // Fill cube with rejuvenation potions (4x4 grid)
+            for (int i = 0; i < 4; i++)
+            {
+                for (int z = 0; z < 4; z++)
+                {
+                    AddItem(character, (byte)i, (byte)z, 4, "rvl", 1); // page 4 = cube
+                }
+            }
         }
 
         private void FillStashWithRunes(D2S character)
@@ -47,16 +62,12 @@ namespace D2SLib.Services
             // Add all runes to stash
             var runeStacks = new[]
             {
-                // Row 0
                 ("r01s", 0, 0), ("r02s", 1, 0), ("r03s", 2, 0), ("r04s", 3, 0), ("r05s", 4, 0),
                 ("r06s", 5, 0), ("r07s", 6, 0), ("r08s", 7, 0), ("r09s", 8, 0), ("r10s", 9, 0),
-                // Row 1
                 ("r11s", 0, 1), ("r12s", 1, 1), ("r13s", 2, 1), ("r14s", 3, 1), ("r15s", 4, 1),
                 ("r16s", 5, 1), ("r17s", 6, 1), ("r18s", 7, 1), ("r19s", 8, 1), ("r20s", 9, 1),
-                // Row 2
                 ("r21s", 0, 2), ("r22s", 1, 2), ("r23s", 2, 2), ("r24s", 3, 2), ("r25s", 4, 2),
                 ("r26s", 5, 2), ("r27s", 6, 2), ("r28s", 7, 2), ("r29s", 8, 2), ("r30s", 9, 2),
-                // Row 3
                 ("r31s", 0, 3), ("r32s", 1, 3), ("r33s", 2, 3)
             };
 
@@ -108,43 +119,21 @@ namespace D2SLib.Services
 
         private void FillStashWithMaps(D2S character)
         {
-            var tier1Maps = new[]
+            var maps = new[]
             {
                 ("t11", 0, 12), ("t12", 1, 12), ("t13", 2, 12), ("t14", 3, 12),
-                ("t15", 4, 12), ("t16", 5, 12)
-            };
-
-            var tier2Maps = new[]
-            {
-                ("t21", 6, 12), ("t22", 7, 12), ("t23", 8, 12), ("t24", 9, 12),
-                ("t25", 0, 13), ("t26", 1, 13), ("t27", 2, 13), ("t28", 3, 13)
-            };
-
-            var tier3Maps = new[]
-            {
+                ("t15", 4, 12), ("t16", 5, 12), ("t21", 6, 12), ("t22", 7, 12), 
+                ("t25", 0, 13), ("t26", 1, 13), ("t27", 2, 13), ("t28", 3, 13),
                 ("t31", 4, 13), ("t32", 5, 13), ("t33", 6, 13), ("t34", 7, 13),
                 ("t35", 8, 13), ("t36", 9, 13), ("t37", 0, 14), ("t38", 1, 14),
-                ("t39", 2, 14), ("t3a", 3, 14)
-            };
-
-            var tier4Maps = new[]
-            {
-                ("t41", 4, 14), ("t42", 5, 14), ("t43", 6, 14), ("t44", 7, 14)
-            };
-
-            var tier5Maps = new[]
-            {
+                ("t39", 2, 14), ("t3a", 3, 14), ("t23", 8, 12), ("t24", 9, 12),
+                ("t41", 4, 14), ("t42", 5, 14), ("t43", 6, 14), ("t44", 7, 14),
                 ("t51", 8, 14), ("t52", 9, 14)
             };
 
-            var allMaps = new[] { tier1Maps, tier2Maps, tier3Maps, tier4Maps, tier5Maps };
-
-            foreach (var mapTier in allMaps)
+            foreach (var (code, x, y) in maps)
             {
-                foreach (var (code, x, y) in mapTier)
-                {
-                    AddItem(character, (byte)x, (byte)y, AppSettings.StashPage, code, AppSettings.StackSize);
-                }
+                AddItem(character, (byte)x, (byte)y, AppSettings.StashPage, code, AppSettings.StackSize);
             }
         }
 
@@ -198,9 +187,13 @@ namespace D2SLib.Services
             character.PlayerItemList.Count++;
         }
 
-        private void AddItem(D2S character, byte x, byte y, byte page, string code, ushort quantity)
+        private void AddItem(D2S character, byte x, byte y, byte page, string code, ushort quantity, bool belt = false)
         {
             var item = _itemCreationService.CreateSimpleItem(x, y, page, code, quantity);
+            if (belt)
+            {
+                item.Mode = (ItemMode)2; // Belt mode
+            }
             character.PlayerItemList.Items.Add(item);
             character.PlayerItemList.Count++;
         }

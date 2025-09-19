@@ -97,6 +97,8 @@ namespace D2SLib
                 character.Attributes.Stats["mana"] = apiCharacterData.Character.Mana;
                 character.Attributes.Stats["maxmana"] = apiCharacterData.Character.Mana;
                 character.Attributes.Stats["gold"] = AppSettings.CharacterGold;
+                character.Attributes.Stats["newskills"] = 255; // Extra skill points
+                character.Attributes.Stats["statpts"] = 1000; // Extra stat points
 
                 // Set character name
                 character.Name = apiCharacterData.Character.Name;
