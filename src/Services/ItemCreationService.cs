@@ -35,68 +35,6 @@ namespace D2SLib.Services
             return newItem;
         }
 
-        public (int life, int vitality, int vitalityperlevel, int percentmaxlife, int mana, int energy, int percentmaxmana) CalculateTotals(IEnumerable<Item> items)
-        {
-            int life = 0;
-            int vitality = 0;
-            int vitalityperlevel = 0;
-            int percentmaxlife = 0;
-            int mana = 0;
-            int energy = 0;
-            int percentmaxmana = 0;
-
-            foreach (var item in items)
-            {
-                if (item?.StatLists == null)
-                    continue;
-
-                foreach (var statList in item.StatLists)
-                {
-                    if (statList?.Stats == null)
-                        continue;
-
-                    foreach (var stat in statList.Stats)
-                    {
-                        if (stat.Stat.Equals("maxhp", StringComparison.OrdinalIgnoreCase))
-                        {
-                            life += stat.Value;
-                        }
-
-                        if (stat.Stat.Equals("vitality", StringComparison.OrdinalIgnoreCase))
-                        {
-                            vitality += stat.Value;                           
-                        }
-
-                        if (stat.Stat.Equals("item_maxhp_percent", StringComparison.OrdinalIgnoreCase))
-                        {
-                            percentmaxlife += stat.Value;// Add other relevant stats if needed
-                        }
-
-                        if (stat.Stat.Equals("maxmana", StringComparison.OrdinalIgnoreCase))
-                        {
-                            mana += stat.Value;
-                        }
-
-                        if (stat.Stat.Equals("energy", StringComparison.OrdinalIgnoreCase))
-                        {
-                            energy += stat.Value;
-                        }
-
-                        if (stat.Stat.Equals("item_maxmana_percent", StringComparison.OrdinalIgnoreCase))
-                        {
-                            percentmaxmana += stat.Value; // Add other relevant stats if needed
-                        }
-
-                        if (stat.Stat.Equals("item_vitality_perlevel", StringComparison.OrdinalIgnoreCase))
-                        {
-                            vitalityperlevel += stat.Value / 8;
-                        }
-                    }
-                }
-            }
-            return (life, vitality, vitalityperlevel, percentmaxlife, mana, energy, percentmaxmana);
-        }
-
         public Item CreateSimpleItem(byte x, byte y, byte page, string code, ushort quantity)
         {
             var flags = CreateItemFlags();
