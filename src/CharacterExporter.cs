@@ -161,13 +161,41 @@ namespace D2SLib
                         break;
                 }
 
-                int lifeFromAttributeVitality = (int)Math.Round((apiCharacterData.Character.Attributes.Vitality - baseVit) * vitalityCoeff);
-                int manaFromAttributeEnergy = (int)Math.Round((apiCharacterData.Character.Attributes.Energy - baseEnergy) * energyCoeff);
+                int lifeFromAttributeVitality = (int)Math.Round((apiCharacterData.Character.Attributes.Vitality - basevitality) * vitalitycoefficient);
+                int LifeFromVitalityOnItems = (int)Math.Round((totals.vitality + (totals.vitalityperlevel * character.Level)) * vitalitycoefficient);
+                int LifeFromPercentMaxLife = (int)Math.Round((baselife + lifeFromAttributeVitality + totals.life + (totals.lifeperlevel * character.Level)) * (totals.percentmaxlife / 100.0));
+                int TotalLife = baselife + lifeFromAttributeVitality + LifeFromVitalityOnItems + totals.life + (totals.lifeperlevel * character.Level) + LifeFromPercentMaxLife;
+                int newTotalLife = baselife + lifeFromAttributeVitality;
 
-                int totalLife = baseLife + lifeFromAttributeVitality;
+                int ManaFromAttributeEnergy = (int)Math.Round((apiCharacterData.Character.Attributes.Energy - baseenergy) * energycoefficient);
+                int ManaFromEnergyOnItems = (int)Math.Round((totals.energy + (totals.energyperlevel * character.Level)) * energycoefficient);
+                int ManaFromPercentMaxMana = (int)Math.Round((basemana + ManaFromAttributeEnergy + totals.mana + (totals.manaperlevel * character.Level)) * (totals.percentmaxmana / 100.0));
+                int TotalMana = basemana + ManaFromAttributeEnergy + ManaFromEnergyOnItems + totals.mana + (totals.manaperlevel * character.Level) + ManaFromPercentMaxMana;
+                int newTotalMana = basemana + ManaFromAttributeEnergy;
 
-                int totalMana = baseMana + manaFromAttributeEnergy;
-
+                Console.WriteLine($"---------------------LIFE---------------------------");
+                Console.WriteLine($"Total +Life from all items: {totals.life}");
+                Console.WriteLine($"Total +Life per level from all items: {totals.lifeperlevel * character.Level}");
+                Console.WriteLine($"Total +Vitality from all items: {totals.vitality}");
+                Console.WriteLine($"Total +Vitality per level from items: {totals.vitalityperlevel * character.Level}"); 
+                Console.WriteLine($"Total +Maxhp from all items: {totals.percentmaxlife}");
+                Console.WriteLine($"Total baselife: {baselife}");               
+                Console.WriteLine($"life from attribute vitality: {lifeFromAttributeVitality}");
+                Console.WriteLine($"Life From Vitality On Items: {LifeFromVitalityOnItems}");
+                Console.WriteLine($"Life From Percent Max Life: {LifeFromPercentMaxLife}");               
+                Console.WriteLine($"Total life: {TotalLife}");
+                Console.WriteLine($"---------------------MANA---------------------------");
+                Console.WriteLine($"Total +Mana from all items: {totals.mana}");
+                Console.WriteLine($"Total +Mana per level from all items: {totals.manaperlevel * character.Level}");
+                Console.WriteLine($"Total +Energy from all items: {totals.energy}");
+                Console.WriteLine($"Total +Energy per level from all items: {totals.energyperlevel * character.Level}");
+                Console.WriteLine($"Total +Maxmana from all items: {totals.percentmaxmana}");
+                Console.WriteLine($"Total basemana: {basemana}");
+                Console.WriteLine($"Mana From Attribute Energy: {ManaFromAttributeEnergy}");
+                Console.WriteLine($"Mana From Vitality On Items: {LifeFromVitalityOnItems}");
+                Console.WriteLine($"Mana From Percent Max Mana: {ManaFromPercentMaxMana}");
+                Console.WriteLine($"Total mana: {TotalMana}");
+                Console.WriteLine($"---------------------STATS---------------------------");
 
                 // Set gold and stats
                 character.Attributes.Stats["goldbank"] = AppSettings.MaxGold;
