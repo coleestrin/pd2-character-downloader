@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <Nullable>disable</Nullable>
+    <Company />
+    <Authors>coleestrin, BetweenWalls, dschu012</Authors>
+    <PackageTags>d2s d2i diablo-ii diablo2 d2r pd2 projectd2 project-diablo-ii d2x sss</PackageTags>
+    <Description>PD2 Character Downloader - Fetches PD2 multiplayer characters and converts them to singleplayer .d2s files. Files are compatible with both PlugY and normal SP.</Description>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/coleestrin/pd2-character-downloader</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Version>1.0.0</Version>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
+    <StartupObject />
+    <LangVersion>10.0</LangVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.3.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+  </ItemGroup>
+<!--
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="XCOPY $(ProjectDir)main\TEXT\* $(ProjectDir)$(OutDir)\TEXT\ /E /Y" />
+  </Target>
+-->
+</Project>

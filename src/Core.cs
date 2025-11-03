@@ -1,0 +1,84 @@
+﻿using D2SLib.Model.Save;
+using System;
+using System.IO;
+
+namespace D2SLib
+{
+    public class Core
+    {
+        public static TXT TXT { get; set; }
+        /*
+        public static TXT TXT
+        {
+            get
+            {
+                return _TXT ?? ResourceFilesTXT.Instance.TXT;
+            }
+            set
+            {
+                _TXT = value;
+            }
+        }
+        */
+
+        public static D2S ReadD2S(string path)
+        {
+            return D2S.Read(File.ReadAllBytes(path));
+        }
+
+        public static D2S ReadD2S(byte[] bytes)
+        {
+            return D2S.Read(bytes);
+        }
+
+        public static Item ReadItem(string path, UInt32 version)
+        {
+            return ReadItem(File.ReadAllBytes(path), version);
+        }
+
+        public static Item ReadItem(byte[] bytes, UInt32 version)
+        {
+            return Item.Read(bytes, version);
+        }
+        public static D2I ReadD2I(string path, UInt32 version)  // old version
+        {
+            return ReadD2I(File.ReadAllBytes(path), version, ".sss");
+        }
+
+        public static D2I ReadD2I(byte[] bytes, UInt32 version)  // old version
+        {
+            return D2I.Read(bytes, version, ".sss");
+        }
+
+        public static D2I ReadD2I(string path, UInt32 version, string type)
+        {
+            return ReadD2I(File.ReadAllBytes(path), version, type);
+        }
+
+        public static D2I ReadD2I(byte[] bytes, UInt32 version, string type)
+        {
+            return D2I.Read(bytes, version, type);
+        }
+
+        public static byte[] WriteD2S(D2S d2s)
+        {
+            return D2S.Write(d2s);
+        }
+
+        public static byte[] WriteItem(Item item, UInt32 version)
+        {
+            return Item.Write(item, version);
+        }
+
+        public static byte[] WriteD2I(D2I d2i, UInt32 version)  // old version
+        {
+            return D2I.Write(d2i, version, ".sss");
+        }
+
+        public static byte[] WriteD2I(D2I d2i, UInt32 version, string type)
+        {
+            return D2I.Write(d2i, version, type);
+        }
+
+    }
+}
