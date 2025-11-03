@@ -375,48 +375,48 @@ map_glob_density	372			1	16											54	2000				12	0																	211	4	2	Ma
 map_play_addexperience	373		1	9											36015	519	1085		3	0	9	50																	213	4	2	MapGlobExp	MapGlobExp									0
 map_glob_arealevel	374			1	16											54	2001				12	0																	209	1	1	MapGlobLevel	MapGlobLevel									0
 map_glob_monsterrarity	375			1	16											54	2002				12	0																	212	4	2	MapGlobMonRarity	MapGlobMonRarity									0
-map_mon_firemindam	376		1	16											11	10	48		8	0	8	0												1					102	6	2	MapMonHave	MapMonHave	ModStr1p								0
-map_mon_firemaxdam	377		1	16											19	10	49		8	0	9	0												1					101	6	2	MapMonHave	MapMonHave	ModStr1o								0
-map_mon_lightmindam	378		1	16											12	10	50		6	0	6	0												1					99	6	2	MapMonHave	MapMonHave	ModStr1r								0
-map_mon_lightmaxdam	379		1	16											17	10	51		9	0	10	0												1					98	6	2	MapMonHave	MapMonHave	ModStr1q								0
-map_mon_magicmindam	380		1	16											196	20	52		6	0	8	0												1					104	6	2	MapMonHave	MapMonHave	strModMagicDamage								0
-map_mon_magicmaxdam	381		1	16											183	20	53		7	0	9	0												1					103	6	2	MapMonHave	MapMonHave	strModMagicDamage								0
-map_mon_coldmindam	382		1	16											451	512	54		6	0	8	0												1					96	6	2	MapMonHave	MapMonHave	ModStr1t								0
-map_mon_coldmaxdam	383		1	16											128	340	55		8	0	9	0												1					95	6	2	MapMonHave	MapMonHave	ModStr1s								0
-map_mon_coldlength	384		1	16											77	4	56		8	0	8	0												1																		0
-map_mon_poisonmindam	385		1	19											12	28	57		9	0	10	0												1					92	6	2	MapMonHave	MapMonHave	ModStr4i								0
-map_mon_poisonmaxdam	386		1	19											11	34	58		9	0	10	0												1					91	6	2	MapMonHave	MapMonHave	ModStr4h								0
-map_mon_poisonlength	387		1	16											0	4	59		8	0	9	0												1																		0
-map_mon_passive_fire_mastery	388		1	12											1117	415	329		8	0	9	50																	88	8	2	MapMonHave	MapMonHave	ModitemdamFiresk								0
-map_mon_passive_ltng_mastery	389		1	12											1054	408	330		8	0	9	50																	88	8	2	MapMonHave	MapMonHave	ModitemdamLtngsk								0
-map_mon_passive_cold_mastery	390		1	12											1295	379	331		8	0	9	50																	88	8	2	MapMonHave	MapMonHave	ModitemdamColdsk								0
-map_mon_passive_pois_mastery	391		1	12											978	394	332		8	0	9	50																	88	8	2	MapMonHave	MapMonHave	ModitemdamPoissk								0
-map_mon_fasterattackrate	392	1	1	9											1042	156	93		7	20	7	20												1					145	8	2	MapMonHave	MapMonHave	ModStr4m	4	8	2	MapMonHave	MapMonHave	MapAtkCastRate		0
-map_mon_fastercastrate	393	1	1	9											3876	156	105		7	20	7	20																	142	8	2	MapMonHave	MapMonHave	ModStr4v	4	8	2	MapMonHave	MapMonHave	MapAtkCastRate		0
-map_mon_tohit	394		1	16											15	10	119		10		10													1					115	8	2	MapMonHave	MapMonHave	ModStr1h	5	8	2	MapMonHave	MapMonHave	MapPierceAR		0
-map_mon_ac%	395		1	11											47	20	16		9	0	9	0			13			armorclass											114	8	2	MapMonHave	MapMonHave	Modstr2v								0
-map_mon_absorbcold_percent	396		1	7											5486	102	148		7	0	7	0																	25	7	2	MapMonHave	MapMonHave	ModStr5m								0
-map_mon_absorbmagic_percent	397		1	7											5486	102	146		7	0	7	0																	26	7	2	MapMonHave	MapMonHave	ModStr5k								0
-map_mon_absorblight_percent	398		1	7											5486	102	144		7	0	7	0																	24	7	2	MapMonHave	MapMonHave	ModStr5i								0
-map_mon_absorbfire_percent	399		1	7											5486	102	142		7	0	7	0																	23	7	2	MapMonHave	MapMonHave	ModStr5g								0
-map_mon_normal_damage_reduction	400		1	10											188	200	34		10	0	10	0																	22	9	2	MapMonTake	MapMonTake	MapFlatPhysRed								0
-map_mon_velocitypercent	401	1	1	10		1									5486	102	67		7	30	7	30																	155	7	2	MapMonHave	MapMonHave	MapMonVelocity								0
-map_mon_hpregen	402		1	10											451	410	74		12	30	12	30																	56	6	2	MapMonHave	MapMonHave	ModStr2l								0
-map_mon_lifedrainmindam	403		1	16											1044	341	60		7	0	7	0												1					88	7	2	MapMonHave	MapMonHave	ModStr2z								0
-map_mon_fastergethitrate	404	1	1	9											1065	72	99		7	20	7	20																	139	8	2	MapMonHave	MapMonHave	ModStr4p								0
-map_mon_maxhp_percent	405		1	16											32093	204	76		6	10	6	10			11			maxhp											58	7	2	MapMonHave	MapMonHave	MapMaxHP								0
-map_mon_pierce	406		1	7											1924	2048	156		7	0	7	0												1					132	8	2	MapMonHave	MapMonHave	ModPierceChance	5	8	2	MapMonHave	MapMonHave	MapPierceAR		0
-map_mon_openwounds	407		1	7							1				23	10	135		7	0	7	0												1	domeleedamage	15	domissiledamage	15	83	7	2	MapMonHave	MapMonHave	ModStr3m								0
-map_mon_crushingblow	408		1	7							1				98	40	136		7	0	7	0												1	domeleedamage	16	domissiledamage	16	87	7	2	MapMonHave	MapMonHave	ModStr5c								0
-map_mon_curse_resistance	409			9											159	33	109		14	0	9	0																	55	7	2	MapMonHave	MapMonHave	MapMonCurse								0
+map_mon_firemindam	376		1	16											11	10	0048		8	0	8	0												1					102	6	2	MapMonHave	MapMonHave	ModStr1p								0
+map_mon_firemaxdam	377		1	16											19	10	0049		8	0	9	0												1					101	6	2	MapMonHave	MapMonHave	ModStr1o								0
+map_mon_lightmindam	378		1	16											12	10	0050		6	0	6	0												1					99	6	2	MapMonHave	MapMonHave	ModStr1r								0
+map_mon_lightmaxdam	379		1	16											17	10	0051		9	0	10	0												1					98	6	2	MapMonHave	MapMonHave	ModStr1q								0
+map_mon_magicmindam	380		1	16											196	20	0052		6	0	8	0												1					104	6	2	MapMonHave	MapMonHave	strModMagicDamage								0
+map_mon_magicmaxdam	381		1	16											183	20	0053		7	0	9	0												1					103	6	2	MapMonHave	MapMonHave	strModMagicDamage								0
+map_mon_coldmindam	382		1	16											451	512	0054		6	0	8	0												1					96	6	2	MapMonHave	MapMonHave	ModStr1t								0
+map_mon_coldmaxdam	383		1	16											128	340	0055		8	0	9	0												1					95	6	2	MapMonHave	MapMonHave	ModStr1s								0
+map_mon_coldlength	384		1	16											77	4	0056		8	0	8	0												1																		0
+map_mon_poisonmindam	385		1	19											12	28	0057		9	0	10	0												1					92	6	2	MapMonHave	MapMonHave	ModStr4i								0
+map_mon_poisonmaxdam	386		1	19											11	34	0058		9	0	10	0												1					91	6	2	MapMonHave	MapMonHave	ModStr4h								0
+map_mon_poisonlength	387		1	16											0	4	0059		8	0	9	0												1																		0
+map_mon_passive_fire_mastery	388		1	12											1117	415	0329		8	0	9	50																	88	8	2	MapMonHave	MapMonHave	ModitemdamFiresk								0
+map_mon_passive_ltng_mastery	389		1	12											1054	408	0330		8	0	9	50																	88	8	2	MapMonHave	MapMonHave	ModitemdamLtngsk								0
+map_mon_passive_cold_mastery	390		1	12											1295	379	0331		8	0	9	50																	88	8	2	MapMonHave	MapMonHave	ModitemdamColdsk								0
+map_mon_passive_pois_mastery	391		1	12											978	394	0332		8	0	9	50																	88	8	2	MapMonHave	MapMonHave	ModitemdamPoissk								0
+map_mon_fasterattackrate	392	1	1	9											1042	156	0093		7	20	7	20												1					145	8	2	MapMonHave	MapMonHave	ModStr4m	4	8	2	MapMonHave	MapMonHave	MapAtkCastRate		0
+map_mon_fastercastrate	393	1	1	9											3876	156	0105		7	20	7	20																	142	8	2	MapMonHave	MapMonHave	ModStr4v	4	8	2	MapMonHave	MapMonHave	MapAtkCastRate		0
+map_mon_tohit	394		1	16											15	10	0119		10		10													1					115	8	2	MapMonHave	MapMonHave	ModStr1h	5	8	2	MapMonHave	MapMonHave	MapPierceAR		0
+map_mon_ac%	395		1	11											47	20	0016		9	0	9	0			13			armorclass											114	8	2	MapMonHave	MapMonHave	Modstr2v								0
+map_mon_absorbcold_percent	396		1	7											5486	102	0148		7	0	7	0																	25	7	2	MapMonHave	MapMonHave	ModStr5m								0
+map_mon_absorbmagic_percent	397		1	7											5486	102	0146		7	0	7	0																	26	7	2	MapMonHave	MapMonHave	ModStr5k								0
+map_mon_absorblight_percent	398		1	7											5486	102	0144		7	0	7	0																	24	7	2	MapMonHave	MapMonHave	ModStr5i								0
+map_mon_absorbfire_percent	399		1	7											5486	102	0142		7	0	7	0																	23	7	2	MapMonHave	MapMonHave	ModStr5g								0
+map_mon_normal_damage_reduction	400		1	10											188	200	0034		10	0	10	0																	22	9	2	MapMonTake	MapMonTake	MapFlatPhysRed								0
+map_mon_velocitypercent	401	1	1	10		1									5486	102	0067		7	30	7	30																	155	7	2	MapMonHave	MapMonHave	MapMonVelocity								0
+map_mon_hpregen	402		1	10											451	410	0074		12	30	12	30																	56	6	2	MapMonHave	MapMonHave	ModStr2l								0
+map_mon_lifedrainmindam	403		1	16											1044	341	0060		7	0	7	0												1					88	7	2	MapMonHave	MapMonHave	ModStr2z								0
+map_mon_fastergethitrate	404	1	1	9											1065	72	0099		7	20	7	20																	139	8	2	MapMonHave	MapMonHave	ModStr4p								0
+map_mon_maxhp_percent	405		1	16											32093	204	0076		6	10	6	10			11			maxhp											58	7	2	MapMonHave	MapMonHave	MapMaxHP								0
+map_mon_pierce	406		1	7											1924	2048	0156		7	0	7	0												1					132	8	2	MapMonHave	MapMonHave	ModPierceChance	5	8	2	MapMonHave	MapMonHave	MapPierceAR		0
+map_mon_openwounds	407		1	7							1				23	10	0135		7	0	7	0												1	domeleedamage	15	domissiledamage	15	83	7	2	MapMonHave	MapMonHave	ModStr3m								0
+map_mon_crushingblow	408		1	7							1				98	40	0136		7	0	7	0												1	domeleedamage	16	domissiledamage	16	87	7	2	MapMonHave	MapMonHave	ModStr5c								0
+map_mon_curse_resistance	409			9											159	33	0109		14	0	9	0																	55	7	2	MapMonHave	MapMonHave	MapMonCurse								0
 map_play_ac%	410		1	16											47	20	1016		14	60	14	60			13			armorclass											198	7	2	MapPlayHave	MapPlayHave	Modstr2v								0
 map_play_fastergethitrate	411	1	1	9											1065	72	1099		14	60	14	60																	199	8	2	MapPlayHave	MapPlayHave	ModStr4p								0
 map_play_toblock	412		1	10											89	204	1020		14	60	14	60																	199	7	2	MapPlayHave	MapPlayHave	MapPlayBlock								0
 map_play_hpregen	413			10											451	410	1074		14	60	14	60																	204	6	2	MapPlayHave	MapPlayHave	ModStr2w								0
-map_mon_passive_fire_pierce	414		1	9												2578	333		8	0	8	0																	200	7	2	MapMonIgnore	MapMonHave	MapMonFirePierce								0
-map_mon_passive_ltng_pierce	415		1	9												2493	334		8	0	8	0																	200	7	2	MapMonIgnore	MapMonHave	MapMonLtngPierce								0
-map_mon_passive_cold_pierce	416		1	9												1984	335		8	0	8	0																	200	7	2	MapMonIgnore	MapMonHave	MapMonColdPierce								0
-map_mon_passive_pois_pierce	417		1	9												2345	336		8	0	8	0																	200	7	2	MapMonIgnore	MapMonHave	MapMonPoisPierce								0
+map_mon_passive_fire_pierce	414		1	9												2578	0333		8	0	8	0																	200	7	2	MapMonIgnore	MapMonHave	MapMonFirePierce								0
+map_mon_passive_ltng_pierce	415		1	9												2493	0334		8	0	8	0																	200	7	2	MapMonIgnore	MapMonHave	MapMonLtngPierce								0
+map_mon_passive_cold_pierce	416		1	9												1984	0335		8	0	8	0																	200	7	2	MapMonIgnore	MapMonHave	MapMonColdPierce								0
+map_mon_passive_pois_pierce	417		1	9												2345	0336		8	0	8	0																	200	7	2	MapMonIgnore	MapMonHave	MapMonPoisPierce								0
 map_play_maxfireresist	418		1	9											584	256	1040		14	60	14	60																	204	7	2	MapPlayHave	MapPlayHave	ModStr5u	8	7	2	MapPlayHave	MapPlayHave	MapPlayMaxAllRes		0
 map_play_maxlightresist	419		1	9											584	256	1042		14	60	14	60																	203	7	2	MapPlayHave	MapPlayHave	ModStr5w	8	7	2	MapPlayHave	MapPlayHave	MapPlayMaxAllRes		0
 map_play_maxcoldresist	420		1	9											584	256	1044		14	60	14	60																	202	7	2	MapPlayHave	MapPlayHave	ModStr5v	8	7	2	MapPlayHave	MapPlayHave	MapPlayMaxAllRes		0
@@ -425,8 +425,8 @@ item_replenish_charges	422		1	5											106	256	1024		5	0	6	0																	
 item_leap_speed	423		1	5													1024		5		5																		120	4	1	ModLeapSpeed	ModLeapSpeed									0
 item_healafterhit	424		1	7							1				30	101	1024		3	0	7	0													domeleedamage	28	domissiledamage	28	16	1	1	ModItemHPaH	ModItemHPaH									0
 passive_phys_pierce	425		1	9													1024		8	0	8	0																	158	20	1	ModPhysPierce	ModPhysPierce									0
-map_mon_ed%	426		1	16											15	10	25		10		10													1					115	8	2	MapMonHave	MapMonHave	MapEnhancedDmg								0
-map_mon_splash	427		1	7	16						1			2	190	256	359		21	0	7	0	16											1	domeleedamage	20			160	9	0	MapMon	MapMon	MapMonSplash								0
+map_mon_ed%	426		1	16											15	10	0025		10		10													1					115	8	2	MapMonHave	MapMonHave	MapEnhancedDmg								0
+map_mon_splash	427		1	7	16						1			2	190	256	0359		21	0	7	0	16											1	domeleedamage	20			160	9	0	MapMon	MapMon	MapMonSplash								0
 map_play_fireresist	428		1	9											584	256	1039		14	60	14	60																	204	7	2	MapPlayHave	MapPlayHave	ModStr1j	3	7	2	MapPlayHave	MapPlayHave	MapPlayAllRes		0
 map_play_lightresist	429		1	9											584	256	1041		14	60	14	60																	203	7	2	MapPlayHave	MapPlayHave	ModStr1l	3	7	2	MapPlayHave	MapPlayHave	MapPlayAllRes		0
 map_play_coldresist	430		1	9											584	256	1043		14	60	14	60																	202	7	2	MapPlayHave	MapPlayHave	ModStr1k	3	7	2	MapPlayHave	MapPlayHave	MapPlayAllRes		0
@@ -448,11 +448,11 @@ immune_stat	445		1	12											1117	415	1024		8	0	9	50																	88	4	1	M
 mon_cooldown1	446		1	12											1117	415	1024		8	0	9	50																	88	4	1	ModitemdamFiresk	ModitemdamFiresk									0
 mon_cooldown2	447		1	12											1117	415	1024		8	0	9	50																	88	4	1	ModitemdamFiresk	ModitemdamFiresk									0
 mon_cooldown3	448		1	12											1117	415	1024		8	0	9	50																	88	4	1	ModitemdamFiresk	ModitemdamFiresk									0
-map_mon_deadlystrike	449		1	7											31	25	141		7	0	7	0												1					85	7	2	MapMonHave	MapMonHave	ModStr5q								0
-map_mon_cannotbefrozen	450		1	2											15011	2048	153		1		1																		20	9	0	MapMonHave	MapMonHave	ModStr5z								0
+map_mon_deadlystrike	449		1	7											31	25	0141		7	0	7	0												1					85	7	2	MapMonHave	MapMonHave	ModStr5q								0
+map_mon_cannotbefrozen	450		1	2											15011	2048	0153		1		1																		20	9	0	MapMonHave	MapMonHave	ModStr5z								0
 map_play_fasterattackrate	451	1	1	9											1042	156	1093		7	20	7	20												1					145	7	2	MapPlayHave	MapPlayHave	ModStr4m	7	7	2	MapPlayHave	MapPlayHave	MapAtkCastSpeed		0
 map_play_fastercastrate	452	1	1	9											3876	156	1105		7	20	7	20																	142	7	2	MapPlayHave	MapPlayHave	ModStr4v	7	7	2	MapPlayHave	MapPlayHave	MapAtkCastSpeed		0
-map_mon_skillondeath	453		1	7	16						1			2	11	9	197		21	0	7	0	16												killed	30			160	15		Moditemskondeath	Moditemskondeath									0
+map_mon_skillondeath	453		1	7	16						1			2	11	9	0197		21	0	7	0	16												killed	30			160	15		Moditemskondeath	Moditemskondeath									0
 map_play_maxhp_percent	454		1	16											32093	204	1076		6	10	6	10			11			maxhp											58	7	2	MapPlayHave	MapPlayHave	ModStr2g								0
 map_play_maxmana_percent	455		1	16											56452	204	1077		6	10	6	10			11			maxmana											54	7	2	MapPlayHave	MapPlayHave	ModStr2h								0
 map_play_damageresist	456		1	9											152	68	1036		8	0	8	0																	60	7	2	MapPlayHave	MapPlayHave	ModStrMapPlayerPDR								0
@@ -493,19 +493,19 @@ eaglehorn_raven	490			11													1024		6		11																		160	6	2	Eagleh
 pvp_disable	491		1	5													1024		5		5																															0
 pvp_lld_cd	492		1	5													1024		5		5																															0
 map_glob_skirmish_mode	493			1	16											54	2004				12	0																	248	3	0	MapGlobSkirmishMode	MapGlobSkirmishMode									0
-map_mon_dropjewelry	494		1	9											1065	72	494		7	20	7	20																	205	8	2	MapMonHave	MapMonHave	MapMonIncreasedJewelry								0
-map_mon_dropweapons	495		1	9											1065	72	495		7	20	7	20																	205	8	2	MapMonHave	MapMonHave	MapMonIncreasedWeapons								0
-map_mon_droparmor	496		1	9											1065	72	496		7	20	7	20																	205	8	2	MapMonHave	MapMonHave	MapMonIncreasedArmor								0
-map_mon_dropcrafting	497		1	9											1065	72	497		7	20	7	20																	205	8	2	MapMonHave	MapMonHave	MapMonIncreasedCrafting								0
+map_mon_dropjewelry	494		1	9											1065	72	0494		7	20	7	20																	205	8	2	MapMonHave	MapMonHave	MapMonIncreasedJewelry								0
+map_mon_dropweapons	495		1	9											1065	72	0495		7	20	7	20																	205	8	2	MapMonHave	MapMonHave	MapMonIncreasedWeapons								0
+map_mon_droparmor	496		1	9											1065	72	0496		7	20	7	20																	205	8	2	MapMonHave	MapMonHave	MapMonIncreasedArmor								0
+map_mon_dropcrafting	497		1	9											1065	72	0497		7	20	7	20																	205	8	2	MapMonHave	MapMonHave	MapMonIncreasedCrafting								0
 map_glob_extra_boss	498			1	16											54	2005				12	0																	206	3	0	MapGlobExtraBoss	MapGlobExtraBoss									0
 map_glob_add_mon_shriek	499			1	16											54	2003				12	0																	160	3	0	MapAddMonShriek	MapAddMonShriek									0
 map_force_event	500			6											54	204	0		8	0	6	0																	203	3	0	StrForceMapEvent	StrForceMapEvent									0
 deep_wounds	501		1	16	8												1024		16	0	16	0																	82	1	1	OpenWoundsItem	OpenWoundsItem									0
-map_mon_dropcharms	502		1	9											1065	72	502		7	20	7	20																	205	8	2	MapMonHave	MapMonHave	MapMonIncreasedCharms								0
+map_mon_dropcharms	502		1	9											1065	72	0502		7	20	7	20																	205	8	2	MapMonHave	MapMonHave	MapMonIncreasedCharms								0
 map_glob_dropcorrupted	503		1	9											1065	72	2006		7	20	7	20																	205	8	2	MapMonHave	MapMonHave	MapMonIncreasedCorrupted								0
 curse_effectiveness	504		1	9											103	40	1024		8	0	8	50																	38	4	2	StrCurseEffectiveness	StrCurseEffectiveness									0
 map_glob_boss_dropfacet	505			2											1065	72	2009		2	2	2	2																	208	3	0	MapBossFacet	MapBossFacet									0
-map_mon_dropjewels	506		1	9											1065	72	506		7	20	7	20																	205	8	2	MapMonHave	MapMonHave	MapMonIncreasedJewels								0
+map_mon_dropjewels	506		1	9											1065	72	0506		7	20	7	20																	205	8	2	MapMonHave	MapMonHave	MapMonIncreasedJewels								0
 es_efficiency	507		1	7													1024		5		5																															0
 map_glob_sundermonsters	508			10											1065	72	2010		10	0	10	0																	208	3	0	MapGlobSunderMonsters	MapGlobSunderMonsters									0
 extra_grizzly	509		1	5													1024		6		5																		149	9	2	YouMaySummon	YouMaySummon	ExtraGrizzly								0

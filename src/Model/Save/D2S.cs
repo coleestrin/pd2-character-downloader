@@ -216,11 +216,6 @@ namespace D2SLib.Model.Save
                 writer.WriteBytes(ClassSkills.Write(d2s.ClassSkills));
                 writer.WriteBytes(ItemList.Write(d2s.PlayerItemList, d2s.Header.Version));
                 writer.WriteBytes(CorpseList.Write(d2s.PlayerCorpses, d2s.Header.Version));
-
-                //Console.WriteLine(d2s.Attributes.GetType().FullName);             // DEBUG FOR INSPECTION
-                //foreach (var prop in d2s.Attributes.GetType().GetProperties())
-                //    Console.WriteLine(prop.Name);
-
                 if (d2s.Status.IsExpansion)
                 {
                     bool temp = Globals.pd2_char_formatting;  // store value
