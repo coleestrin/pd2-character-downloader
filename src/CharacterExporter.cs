@@ -86,16 +86,97 @@ namespace D2SLib
                     character.Status.IsHardcore = true;
                 }
 
+                int baseLife = 0;
+                int baseMana = 0;
+                int baseVit = 0;
+                int baseEnergy = 0;               
+                double vitalityCoeff = 0;
+                double energyCoeff = 0;
+
+                switch (apiCharacterData.Character.Class.Id)
+                {
+                    case 0: // Amazon
+                        baseLife = (int)(50 + 60 + (2 * (character.Level - 1)));
+                        baseMana = (int)(15 + (2 * (character.Level - 1)));
+                        baseVit = 20;
+                        baseEnergy = 15;
+                        vitalityCoeff = 3;
+                        energyCoeff = 1.5;
+                        break;
+
+                    case 1: // Sorceress
+                        baseLife = (int)(40 + 60 + (1 * (character.Level - 1)));
+                        baseMana = (int)(35 + (2 * (character.Level - 1)));
+                        baseVit = 10;
+                        baseEnergy = 35;
+                        vitalityCoeff = 2;
+                        energyCoeff = 2;
+                        break;
+
+                    case 2: // Necromancer
+                        baseLife = (int)Math.Round(45 + 60 + (1.5 * (character.Level - 1)));
+                        baseMana = (int)(25 + (2 * (character.Level - 1)));
+                        baseVit = 15;
+                        baseEnergy = 25;
+                        vitalityCoeff = 2;
+                        energyCoeff = 2;
+                        break;
+                    
+                    case 3: // Paladin
+                        baseLife = (int)(55 + 60 + (2 * (character.Level - 1)));
+                        baseMana = (int)(15 + (2 * (character.Level - 1)));
+                        baseVit = 25;
+                        baseEnergy = 15;
+                        vitalityCoeff = 3;
+                        energyCoeff = 1.5;
+                        break;
+                    
+                    case 4: // Barbarian
+                        baseLife = (int)(55 + 60 + (2 * (character.Level - 1)));
+                        baseMana = (int)Math.Round(10 + (1.5 * (character.Level - 1)));
+                        baseVit = 25;
+                        baseEnergy = 10;
+                        vitalityCoeff = 4;
+                        energyCoeff = 1;
+                        break;
+                    
+                    case 5: // Druid
+                        baseLife = (int)Math.Round(55 + 60 + (1.5 * (character.Level - 1)));
+                        baseMana = (int)(20 + (2 * (character.Level - 1)));
+                        baseVit = 25;
+                        baseEnergy = 20;
+                        vitalityCoeff = 2;
+                        energyCoeff = 2;
+                        break;
+                    
+                    case 6: // Assassin
+                        baseLife = (int)(50 + 60 + (2 * (character.Level - 1)));
+                        baseMana = (int)(25 + (2 * (character.Level - 1)));
+                        baseVit = 20;
+                        baseEnergy = 25;
+                        vitalityCoeff = 3;
+                        energyCoeff = 1.75;
+                        break;
+                }
+
+                int lifeFromAttributeVitality = (int)Math.Round((apiCharacterData.Character.Attributes.Vitality - baseVit) * vitalityCoeff);
+                int manaFromAttributeEnergy = (int)Math.Round((apiCharacterData.Character.Attributes.Energy - baseEnergy) * energyCoeff);
+
+                int totalLife = baseLife + lifeFromAttributeVitality;
+
+                int totalMana = baseMana + manaFromAttributeEnergy;
+
+
                 // Set gold and stats
                 character.Attributes.Stats["goldbank"] = AppSettings.MaxGold;
                 character.Attributes.Stats["vitality"] = apiCharacterData.Character.Attributes.Vitality;
                 character.Attributes.Stats["strength"] = apiCharacterData.Character.Attributes.Strength;
                 character.Attributes.Stats["energy"] = apiCharacterData.Character.Attributes.Energy;
                 character.Attributes.Stats["dexterity"] = apiCharacterData.Character.Attributes.Dexterity;
-                character.Attributes.Stats["hitpoints"] = apiCharacterData.Character.Life;
-                character.Attributes.Stats["maxhp"] = apiCharacterData.Character.Life;
-                character.Attributes.Stats["mana"] = apiCharacterData.Character.Mana;
-                character.Attributes.Stats["maxmana"] = apiCharacterData.Character.Mana;
+                character.Attributes.Stats["maxhp"] = totalLife;
+                character.Attributes.Stats["hitpoints"] = totalLife;
+                character.Attributes.Stats["mana"] = totalMana;
+                character.Attributes.Stats["maxmana"] = totalMana;
                 character.Attributes.Stats["gold"] = AppSettings.CharacterGold;
                 character.Attributes.Stats["newskills"] = 255; // Extra skill points
                 character.Attributes.Stats["statpts"] = 1000; // Extra stat points
