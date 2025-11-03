@@ -88,87 +88,100 @@ namespace D2SLib
                     character.Status.IsHardcore = true;
                 }
 
-                int baseLife = 0;
-                int baseMana = 0;
-                int baseVit = 0;
-                int baseEnergy = 0;               
-                double vitalityCoeff = 0;
-                double energyCoeff = 0;
+                // A list of all items for total life and mana calculation
+                List<Item> allItems = new List<Item>();
+
+                //Loop it
+                foreach (var apiItem in apiCharacterData.Items)
+                {
+                    var newItem = _itemService.CreateItemFromApiData(apiItem);
+                    if (newItem != null)
+                        allItems.Add(newItem);
+                }
+
+                // Calculate totals for substraction on stats
+                var totals = _itemService.CalculateTotals(allItems);
+                int baselife = 0;
+                int basemana = 0;
+                int basevit = 0;
+                int baseenergy = 0;               
+                double vitalitycoeff = 0;
+                double energycoeff = 0;
 
                 switch (apiCharacterData.Character.Class.Id)
                 {
                     case 0: // Amazon
-                        baseLife = (int)(50 + 60 + (2 * (character.Level - 1)));
-                        baseMana = (int)(15 + (2 * (character.Level - 1)));
-                        baseVit = 20;
-                        baseEnergy = 15;
-                        vitalityCoeff = 3;
-                        energyCoeff = 1.5;
+                        baselife = (int)(50 + 60 + (2 * (character.Level - 1)));
+                        basemana = (int)(15 + (2 * (character.Level - 1)));
+                        basevit = 20;
+                        baseenergy = 15;
+                        vitalitycoeff = 3;
+                        energycoeff = 1.5;
                         break;
 
                     case 1: // Sorceress
-                        baseLife = (int)(40 + 60 + (1 * (character.Level - 1)));
-                        baseMana = (int)(35 + (2 * (character.Level - 1)));
-                        baseVit = 10;
-                        baseEnergy = 35;
-                        vitalityCoeff = 2;
-                        energyCoeff = 2;
+                        baselife = (int)(40 + 60 + (1 * (character.Level - 1)));
+                        basemana = (int)(35 + (2 * (character.Level - 1)));
+                        basevit = 10;
+                        baseenergy = 35;
+                        vitalitycoeff = 2;
+                        energycoeff = 2;
                         break;
 
                     case 2: // Necromancer
-                        baseLife = (int)Math.Round(45 + 60 + (1.5 * (character.Level - 1)));
-                        baseMana = (int)(25 + (2 * (character.Level - 1)));
-                        baseVit = 15;
-                        baseEnergy = 25;
-                        vitalityCoeff = 2;
-                        energyCoeff = 2;
+                        baselife = (int)Math.Round(45 + 60 + (1.5 * (character.Level - 1)));
+                        basemana = (int)(25 + (2 * (character.Level - 1)));
+                        basevit = 15;
+                        baseenergy = 25;
+                        vitalitycoeff = 2;
+                        energycoeff = 2;
                         break;
                     
                     case 3: // Paladin
-                        baseLife = (int)(55 + 60 + (2 * (character.Level - 1)));
-                        baseMana = (int)(15 + (2 * (character.Level - 1)));
-                        baseVit = 25;
-                        baseEnergy = 15;
-                        vitalityCoeff = 3;
-                        energyCoeff = 1.5;
+                        baselife = (int)(55 + 60 + (2 * (character.Level - 1)));
+                        basemana = (int)(15 + (2 * (character.Level - 1)));
+                        basevit = 25;
+                        baseenergy = 15;
+                        vitalitycoeff = 3;
+                        energycoeff = 1.5;
                         break;
                     
                     case 4: // Barbarian
-                        baseLife = (int)(55 + 60 + (2 * (character.Level - 1)));
-                        baseMana = (int)Math.Round(10 + (1.5 * (character.Level - 1)));
-                        baseVit = 25;
-                        baseEnergy = 10;
-                        vitalityCoeff = 4;
-                        energyCoeff = 1;
+                        baselife = (int)(55 + 60 + (2 * (character.Level - 1)));
+                        basemana = (int)Math.Round(10 + (1.5 * (character.Level - 1)));
+                        basevit = 25;
+                        baseenergy = 10;
+                        vitalitycoeff = 4;
+                        energycoeff = 1;
                         break;
                     
                     case 5: // Druid
-                        baseLife = (int)Math.Round(55 + 60 + (1.5 * (character.Level - 1)));
-                        baseMana = (int)(20 + (2 * (character.Level - 1)));
-                        baseVit = 25;
-                        baseEnergy = 20;
-                        vitalityCoeff = 2;
-                        energyCoeff = 2;
+                        baselife = (int)Math.Round(55 + 60 + (1.5 * (character.Level - 1)));
+                        basemana = (int)(20 + (2 * (character.Level - 1)));
+                        basevit = 25;
+                        baseenergy = 20;
+                        vitalitycoeff = 2;
+                        energycoeff = 2;
                         break;
                     
                     case 6: // Assassin
-                        baseLife = (int)(50 + 60 + (2 * (character.Level - 1)));
-                        baseMana = (int)(25 + (2 * (character.Level - 1)));
-                        baseVit = 20;
-                        baseEnergy = 25;
-                        vitalityCoeff = 3;
-                        energyCoeff = 1.75;
+                        baselife = (int)(50 + 60 + (2 * (character.Level - 1)));
+                        basemana = (int)(25 + (2 * (character.Level - 1)));
+                        basevit = 20;
+                        baseenergy = 25;
+                        vitalitycoeff = 3;
+                        energycoeff = 1.75;
                         break;
                 }
 
-                int lifeFromAttributeVitality = (int)Math.Round((apiCharacterData.Character.Attributes.Vitality - basevitality) * vitalitycoefficient);
-                int LifeFromVitalityOnItems = (int)Math.Round((totals.vitality + (totals.vitalityperlevel * character.Level)) * vitalitycoefficient);
+                int lifeFromAttributeVitality = (int)Math.Round((apiCharacterData.Character.Attributes.Vitality - basevit) * vitalitycoeff);
+                int LifeFromVitalityOnItems = (int)Math.Round((totals.vitality + (totals.vitalityperlevel * character.Level)) * vitalitycoeff);
                 int LifeFromPercentMaxLife = (int)Math.Round((baselife + lifeFromAttributeVitality + totals.life + (totals.lifeperlevel * character.Level)) * (totals.percentmaxlife / 100.0));
                 int TotalLife = baselife + lifeFromAttributeVitality + LifeFromVitalityOnItems + totals.life + (totals.lifeperlevel * character.Level) + LifeFromPercentMaxLife;
                 int newTotalLife = baselife + lifeFromAttributeVitality;
 
-                int ManaFromAttributeEnergy = (int)Math.Round((apiCharacterData.Character.Attributes.Energy - baseenergy) * energycoefficient);
-                int ManaFromEnergyOnItems = (int)Math.Round((totals.energy + (totals.energyperlevel * character.Level)) * energycoefficient);
+                int ManaFromAttributeEnergy = (int)Math.Round((apiCharacterData.Character.Attributes.Energy - baseenergy) * energycoeff);
+                int ManaFromEnergyOnItems = (int)Math.Round((totals.energy + (totals.energyperlevel * character.Level)) * energycoeff);
                 int ManaFromPercentMaxMana = (int)Math.Round((basemana + ManaFromAttributeEnergy + totals.mana + (totals.manaperlevel * character.Level)) * (totals.percentmaxmana / 100.0));
                 int TotalMana = basemana + ManaFromAttributeEnergy + ManaFromEnergyOnItems + totals.mana + (totals.manaperlevel * character.Level) + ManaFromPercentMaxMana;
                 int newTotalMana = basemana + ManaFromAttributeEnergy;
@@ -203,10 +216,10 @@ namespace D2SLib
                 character.Attributes.Stats["strength"] = apiCharacterData.Character.Attributes.Strength;
                 character.Attributes.Stats["energy"] = apiCharacterData.Character.Attributes.Energy;
                 character.Attributes.Stats["dexterity"] = apiCharacterData.Character.Attributes.Dexterity;
-                character.Attributes.Stats["maxhp"] = totalLife;
-                character.Attributes.Stats["hitpoints"] = totalLife;
-                character.Attributes.Stats["mana"] = totalMana;
-                character.Attributes.Stats["maxmana"] = totalMana;
+                character.Attributes.Stats["maxhp"] = TotalLife;
+                character.Attributes.Stats["hitpoints"] = TotalLife;
+                character.Attributes.Stats["mana"] = TotalMana;
+                character.Attributes.Stats["maxmana"] = TotalMana;
                 character.Attributes.Stats["gold"] = AppSettings.CharacterGold;
                 character.Attributes.Stats["newskills"] = 255; // Extra skill points
                 character.Attributes.Stats["statpts"] = 1000; // Extra stat points
