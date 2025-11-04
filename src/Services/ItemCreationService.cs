@@ -532,6 +532,10 @@ namespace D2SLib.Services
                     });
                 }
             }       
+                    Stat = modifier.Name, // For `perlevel` mods if its not an int we div by 8
+                    Value = (int)((modifier.Values[0] % 1 != 0) ? modifier.Values[0] / 0.125 : modifier.Values[0])
+                });
+            }
             else if (modifier.Values.Count == 1)
             {
                 item.StatLists[0].Stats.Add(new ItemStat
