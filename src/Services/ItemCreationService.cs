@@ -5,6 +5,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text.Json;
+using System.Windows.Markup;
 
 namespace D2SLib.Services
 {
@@ -13,7 +15,7 @@ namespace D2SLib.Services
         public Item CreateItemFromApiData(D2Item apiItem)
         {
             if (apiItem == null) return null;
-            var flags = CreateItemFlags();
+            var flags = CreateItemFlags(apiItem);
             var newItem = new Item
             {
                 Code = apiItem.Base.Id,
@@ -28,96 +30,139 @@ namespace D2SLib.Services
                 FileIndex = CalculateFileIndex(apiItem.Unique),
                 Quality = (ItemQuality)apiItem.Quality.Id,
                 Armor = CalculateArmor(apiItem.Defense),
+                TotalNumberOfSockets = (byte)apiItem.SocketedCount,
                 Flags = flags,
                 StatLists = new List<ItemStatList> { new() { Stats = new List<ItemStat>() } }
             };
+
+            //if (newItem.Code == "7ga")
+            //{
+            //    var json = JsonSerializer.Serialize(apiItem, new JsonSerializerOptions
+            //    {
+            //        WriteIndented = true // makes it pretty-printed
+            //    });
+            //    Console.WriteLine("Created item:");
+            //    Console.WriteLine(json);
+            //}
+
+
             AddModifiersToItem(newItem, apiItem.Modifiers);
             return newItem;
         }
 
-        public (int life, int lifeperlevel, int vitality, int vitalityperlevel, int percentmaxlife, int mana, int manaperlevel, int energy, int energyperlevel, int percentmaxmana) CalculateTotals(IEnumerable<Item> items)
-        {
-            int life = 0;
-            int lifeperlevel = 0;
-            int vitality = 0;
-            int vitalityperlevel = 0;
-            int percentmaxlife = 0;
-            int mana = 0;
-            int manaperlevel = 0;
-            int energy = 0;
-            int energyperlevel = 0;
-            int percentmaxmana = 0;
+        //public (int life, int lifeperlevel, int vitality, int vitalityperlevel, int percentmaxlife, int mana, int manaperlevel, int energy, int energyperlevel, int percentmaxmana) CalculateTotals(IEnumerable<Item> items)
+        //{
+        //    int life = 0;
+        //    int lifeperlevel = 0;
+        //    int vitality = 0;
+        //    int vitalityperlevel = 0;
+        //    int percentmaxlife = 0;
+        //    int mana = 0;
+        //    int manaperlevel = 0;
+        //    int energy = 0;
+        //    int energyperlevel = 0;
+        //    int percentmaxmana = 0;
 
-            foreach (var item in items)
-            {
-                if (item?.StatLists == null)
-                    continue;
+        //    foreach (var item in items)
+        //    {
+        //        if (item?.StatLists == null)
+        //            continue;
 
-                foreach (var statList in item.StatLists)
-                {
-                    if (statList?.Stats == null)
-                        continue;
+        //        foreach (var statList in item.StatLists)
+        //        {
+        //            if (statList?.Stats == null)
+        //                continue;
 
-                    foreach (var stat in statList.Stats)
-                    {
-                        if (stat.Stat.Equals("maxhp", StringComparison.OrdinalIgnoreCase))
-                        {
-                            life += stat.Value;
-                        }
+        //            foreach (var stat in statList.Stats)
+        //            {
+        //                if (stat.Stat.Equals("maxhp", StringComparison.OrdinalIgnoreCase))
+        //                {
+        //                    life += stat.Value;
+        //                }
 
-                        if (stat.Stat.Equals("item_hp_perlevel", StringComparison.OrdinalIgnoreCase)) 
-                        {
-                            lifeperlevel += stat.Value / 8;
-                        }
+        //                if (stat.Stat.Equals("item_hp_perlevel", StringComparison.OrdinalIgnoreCase)) 
+        //                {
+        //                    lifeperlevel += stat.Value / 8;
+        //                }
 
-                        if (stat.Stat.Equals("vitality", StringComparison.OrdinalIgnoreCase))
-                        {
-                            vitality += stat.Value;                           
-                        }
+        //                if (stat.Stat.Equals("vitality", StringComparison.OrdinalIgnoreCase))
+        //                {
+        //                    vitality += stat.Value;                           
+        //                }
 
-                        if (stat.Stat.Equals("item_vitality_perlevel", StringComparison.OrdinalIgnoreCase))
-                        {
-                            vitalityperlevel += stat.Value / 8;
-                        }
+        //                if (stat.Stat.Equals("item_vitality_perlevel", StringComparison.OrdinalIgnoreCase))
+        //                {
+        //                    vitalityperlevel += stat.Value / 8;
+        //                }
 
-                        if (stat.Stat.Equals("item_maxhp_percent", StringComparison.OrdinalIgnoreCase))
-                        {
-                            percentmaxlife += stat.Value;// Add other relevant stats if needed
-                        }
+        //                if (stat.Stat.Equals("item_maxhp_percent", StringComparison.OrdinalIgnoreCase))
+        //                {
+        //                    percentmaxlife += stat.Value;// Add other relevant stats if needed
+        //                }
 
-                        if (stat.Stat.Equals("maxmana", StringComparison.OrdinalIgnoreCase))
-                        {
-                            mana += stat.Value;
-                        }
+        //                if (stat.Stat.Equals("maxmana", StringComparison.OrdinalIgnoreCase))
+        //                {
+        //                    mana += stat.Value;
+        //                }
 
-                        if (stat.Stat.Equals("item_mana_perlevel", StringComparison.OrdinalIgnoreCase))
-                        {
-                            manaperlevel += stat.Value / 8;
-                        }
+        //                if (stat.Stat.Equals("item_mana_perlevel", StringComparison.OrdinalIgnoreCase))
+        //                {
+        //                    manaperlevel += stat.Value / 8;
+        //                }
 
-                        if (stat.Stat.Equals("energy", StringComparison.OrdinalIgnoreCase))
-                        {
-                            energy += stat.Value;
-                        }
+        //                if (stat.Stat.Equals("energy", StringComparison.OrdinalIgnoreCase))
+        //                {
+        //                    energy += stat.Value;
+        //                }
 
-                        if (stat.Stat.Equals("item_energy_perlevel", StringComparison.OrdinalIgnoreCase))
-                        {
-                            energyperlevel += stat.Value / 8;
-                        }
+        //                if (stat.Stat.Equals("item_energy_perlevel", StringComparison.OrdinalIgnoreCase))
+        //                {
+        //                    energyperlevel += stat.Value / 8;
+        //                }
 
-                        if (stat.Stat.Equals("item_maxmana_percent", StringComparison.OrdinalIgnoreCase))
-                        {
-                            percentmaxmana += stat.Value; // Add other relevant stats if needed
-                        }
-                    }
-                }
-            }
-            return (life, lifeperlevel, vitality, vitalityperlevel, percentmaxlife, mana, manaperlevel, energy, energyperlevel, percentmaxmana);
-        }
+        //                if (stat.Stat.Equals("item_maxmana_percent", StringComparison.OrdinalIgnoreCase))
+        //                {
+        //                    percentmaxmana += stat.Value; // Add other relevant stats if needed
+        //                }
+        //            }
+        //        }
+        //    }
+        //    return (life, lifeperlevel, vitality, vitalityperlevel, percentmaxlife, mana, manaperlevel, energy, energyperlevel, percentmaxmana);
+        //}
 
+        //public Item CreateSimpleItem(byte x, byte y, byte page, string code, ushort quantity)
+        //{
+        //    var flags = CreateItemFlags();
+
+        //    return new Item
+        //    {
+        //        Flags = flags,
+        //        Mode = 0,
+        //        Location = 0,
+        //        Version = "101",
+        //        ItemLevel = AppSettings.MaxItemLevel,
+        //        Quality = ItemQuality.Normal,
+        //        Id = AppSettings.DefaultItemId,
+        //        Quantity = quantity,
+        //        X = x,
+        //        Y = y,
+        //        Page = page,
+        //        Code = code,
+        //        StatLists = new List<ItemStatList> { new() { Stats = new List<ItemStat>() } }
+        //    };
+        //}
         public Item CreateSimpleItem(byte x, byte y, byte page, string code, ushort quantity)
         {
-            var flags = CreateItemFlags();
+            var flags = new BitArray(32);
+            flags[4] = true;  // IsIdentified
+            flags[11] = false; // IsSocketed
+            flags[13] = false; // IsNew
+            flags[16] = false; // IsEar
+            flags[17] = false; // IsStarterItem
+            flags[21] = false; // IsCompact
+            flags[22] = false; // IsEthereal
+            flags[24] = false; // IsPersonalized
+            flags[26] = false; // IsRuneword
 
             return new Item
             {
@@ -137,9 +182,38 @@ namespace D2SLib.Services
             };
         }
 
+        //public Item CreateMagicCharm(byte x, byte y, byte page, string code, List<ItemStat> stats)
+        //{
+        //    var flags = CreateItemFlags();
+
+        //    var item = new Item
+        //    {
+        //        Flags = flags,
+        //        Mode = 0,
+        //        Location = 0,
+        //        Quality = ItemQuality.Magic,
+        //        ItemLevel = 1,
+        //        X = x,
+        //        Y = y,
+        //        Page = page,
+        //        Code = code,
+        //        StatLists = new List<ItemStatList> { new() { Stats = stats } }
+        //    };
+
+        //    return item;
+        //}
         public Item CreateMagicCharm(byte x, byte y, byte page, string code, List<ItemStat> stats)
         {
-            var flags = CreateItemFlags();
+            var flags = new BitArray(32);
+            flags[4] = true;  // IsIdentified
+            flags[11] = false; // IsSocketed
+            flags[13] = false; // IsNew
+            flags[16] = false; // IsEar
+            flags[17] = false; // IsStarterItem
+            flags[21] = false; // IsCompact
+            flags[22] = false; // IsEthereal
+            flags[24] = false; // IsPersonalized
+            flags[26] = false; // IsRuneword
 
             var item = new Item
             {
@@ -158,16 +232,31 @@ namespace D2SLib.Services
             return item;
         }
 
-        private BitArray CreateItemFlags()
+        //private BitArray CreateItemFlags()
+        //{
+        //    var flags = new BitArray(32);
+        //    flags[4] = true;  // IsIdentified
+        //    flags[11] = false; // IsSocketed
+        //    flags[13] = false; // IsNew
+        //    flags[16] = false; // IsEar
+        //    flags[17] = false; // IsStarterItem
+        //    flags[21] = false; // IsCompact
+        //    flags[22] = false; // IsEthereal
+        //    flags[24] = false; // IsPersonalized
+        //    flags[26] = false; // IsRuneword
+        //    return flags;
+        //}
+
+        private BitArray CreateItemFlags(D2Item apiItem)
         {
             var flags = new BitArray(32);
-            flags[4] = true;  // IsIdentified
-            flags[11] = false; // IsSocketed
+            flags[4] = apiItem.IsIdentified;  // IsIdentified
+            flags[11] = apiItem.IsSocketed; // IsSocketed
             flags[13] = false; // IsNew
             flags[16] = false; // IsEar
             flags[17] = false; // IsStarterItem
             flags[21] = false; // IsCompact
-            flags[22] = false; // IsEthereal
+            flags[22] = apiItem.IsEthereal; // IsEthereal
             flags[24] = false; // IsPersonalized
             flags[26] = false; // IsRuneword
             return flags;
@@ -190,6 +279,7 @@ namespace D2SLib.Services
 
             foreach (var modifier in modifiers)
             {
+                //AddSocketsToItem(item, modifier);
                 AddModifierToItem(item, modifier);
             }
         }
@@ -258,6 +348,7 @@ namespace D2SLib.Services
                     AddGenericModifier(item, modifier);
                     break;
             }
+
         }
 
         private void AddElementalDamage(Item item, string element, List<float> values)
@@ -404,16 +495,43 @@ namespace D2SLib.Services
             }
         }
 
+        //private void AddSocketsToItem(Item item, D2ItemModifier modifier)
+        //{
+        //    if (item.IsSocketed)
+        //    {
+        //        if (item.TotalNumberOfSockets > 0)
+        //        {
+        //            Console.WriteLine("Adding sockets to item...", item.TotalNumberOfSockets);
+        //            item.StatLists[0].Stats.Add(new ItemStat
+        //            {
+
+        //                Stat = "item_numsockets_textonly",
+        //                Value = (int)modifier.Values[0]
+        //            });
+        //        }
+        //    }
+        //}
+
         private void AddGenericModifier(Item item, D2ItemModifier modifier)
         {
             if (modifier.Name.Contains("_perlevel"))
             {
-                item.StatLists[0].Stats.Add(new ItemStat
+                if (modifier.Name.Contains("item_maxdamage_perlevel"))
                 {
-                    Stat = modifier.Name,
-                    Value = (int)(modifier.Values[0] / 0.125)
-                });
-            }
+                    item.StatLists[0].Stats.Add(new ItemStat
+                    {
+                        Stat = modifier.Name,
+                        Value = (int)(modifier.Values[0])
+                    });                    
+                }
+                else if  (modifier.Name.Contains("_perlevel"))
+                {                     item.StatLists[0].Stats.Add(new ItemStat
+                    {
+                        Stat = modifier.Name,
+                        Value = (int)(modifier.Values[0] * 64)
+                    });
+                }
+            }       
             else if (modifier.Values.Count == 1)
             {
                 item.StatLists[0].Stats.Add(new ItemStat

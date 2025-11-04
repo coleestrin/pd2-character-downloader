@@ -24,6 +24,7 @@ namespace D2SLib.Services
                 character.Quests.Hell
             };
 
+
             foreach (var difficulty in difficulties)
             {
                 var acts = new dynamic[]
@@ -36,10 +37,17 @@ namespace D2SLib.Services
                 };
 
                 foreach (var act in acts)
-                {
-                    CompleteActQuests(act);
+                { 
+                    CompleteActQuests(act);                                       
                 }
+                
             }
+            character.Quests.Normal.ActV.PrisonOfIce.RewardGranted = false;
+            character.Quests.Normal.ActV.PrisonOfIce.RewardPending = true;
+            character.Quests.Nightmare.ActV.PrisonOfIce.RewardGranted = false;
+            character.Quests.Nightmare.ActV.PrisonOfIce.RewardPending = true;
+            character.Quests.Hell.ActV.PrisonOfIce.RewardGranted = false;
+            character.Quests.Hell.ActV.PrisonOfIce.RewardPending = true;
         }
 
         public void UnlockAllWaypoints(D2S character)

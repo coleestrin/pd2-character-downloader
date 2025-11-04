@@ -15,8 +15,12 @@ namespace D2SLib
         public static readonly string OUTPUT_DIR =
             Path.Combine(PROJECT_DIRECTORY, "src", "main", "output") + Path.DirectorySeparatorChar;
         public static readonly string CFE = ".d2s"; // character file extension
+        public static readonly string savePath = "C:\\Program Files (x86)\\Diablo II\\Save\\testee.d2s"; // for reading local D2S files
+        public static readonly string savePath2 = "C:\\Program Files (x86)\\Diablo II\\Save\\testnot.d2s"; // for reading local D2s file to compare
 
         public static TXT txt_pd2 = new TXT();
+        public static bool readLocalD2S = true; // temporary, for debugging
+        public static bool compareLocalD2S = true; // temporary, for debugging
         public static bool writeConsole_D2SRead = false; // temporary, for debugging
         public static bool writeConsole_ItemsRead = false; // temporary, for debugging
         public static bool writeConsole_Stash = true; // temporary, for debugging
