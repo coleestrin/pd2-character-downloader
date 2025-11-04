@@ -1,6 +1,7 @@
 using D2SLib.Configuration;
 using D2SLib.Model.Api;
 using D2SLib.Model.Save;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -516,26 +517,23 @@ namespace D2SLib.Services
         {
             if (modifier.Name.Contains("_perlevel"))
             {
-                if (modifier.Name.Contains("item_maxdamage_perlevel"))
+                if (modifier.Name.Contains("item_tohit_perlevel"))
                 {
                     item.StatLists[0].Stats.Add(new ItemStat
-                    {
-                        Stat = modifier.Name,
-                        Value = (int)(modifier.Values[0])
-                    });                    
-                }
-                else if  (modifier.Name.Contains("_perlevel"))
-                {                     item.StatLists[0].Stats.Add(new ItemStat
                     {
                         Stat = modifier.Name,
                         Value = (int)(modifier.Values[0] * 64)
                     });
                 }
+                else
+                {
+                    item.StatLists[0].Stats.Add(new ItemStat
+                    {
+                        Stat = modifier.Name, // For `perlevel` mods if its not an int we div by 8
+                        Value = (int)((modifier.Values[0] % 1 != 0) ? modifier.Values[0] / 0.125 : modifier.Values[0])
+                    });
+                }        
             }       
-                    Stat = modifier.Name, // For `perlevel` mods if its not an int we div by 8
-                    Value = (int)((modifier.Values[0] % 1 != 0) ? modifier.Values[0] / 0.125 : modifier.Values[0])
-                });
-            }
             else if (modifier.Values.Count == 1)
             {
                 item.StatLists[0].Stats.Add(new ItemStat
