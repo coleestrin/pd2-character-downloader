@@ -1,4 +1,5 @@
 using D2SLib.Model;
+using D2SLib.Model.Api;
 using D2SLib.Model.Save;
 using D2SLib.Model.TXT;
 using System;
@@ -94,35 +95,44 @@ namespace D2SLib
 
                 InitializeGameData();
 
-                var character1 = Core.ReadD2S(savePath);
-                var character2 = Core.ReadD2S(savePath2);
-
-                bool areEqual = character1.Equals(character2);
-                Console.WriteLine($"Comparison result: The two characters are {(areEqual ? "identical" : "different")}.");
-
-                //test
-
-                //for (int i = 0; i < Math.Max(character1.PlayerItemList.Items.Count, character2.PlayerItemList.Items.Count); i++)
-                //{
-                //    var item1 = i < character1.PlayerItemList.Items.Count ? character1.PlayerItemList.Items[i] : null;
-                //    var item2 = i < character2.PlayerItemList.Items.Count ? character2.PlayerItemList.Items[i] : null;
-
-                //    if (item1 == null && item2 == null)
-                //        continue;
-
-                //    Console.WriteLine($"Slot {i}:");
-                //    Console.WriteLine($"  character1: {(item1 != null ? item1.Code + $"({item1.TotalNumberOfSockets}) + $({item1.ToString})" : "empty")}");
-                //    Console.WriteLine($"  character2: {(item2 != null ? item2.Code + $"({item2.TotalNumberOfSockets}) + $({item2.ToString})" : "empty")}");
-                //}
-
-                byte[] character1Bytes = File.ReadAllBytes(savePath);
-                byte[] character2Bytes = File.ReadAllBytes(savePath2);
-                for (int i = 0; i < Math.Min(character1Bytes.Length, character2Bytes.Length); i++)
+                if (Globals.printoutItemComparison)
                 {
-                    if (character1Bytes[i] != character2Bytes[i])
-                        Console.WriteLine($"Difference at offset {i:X4}: {character1Bytes[i]:X2} vs {character2Bytes[i]:X2}");
+                    var character1 = Core.ReadD2S(savePath);
+                    var character2 = Core.ReadD2S(savePath2);
+
+                    for (int i = 0; i < Math.Max(character1.PlayerItemList.Items.Count, character2.PlayerItemList.Items.Count); i++)
+                    {
+                        var item1 = i < character1.PlayerItemList.Items.Count ? character1.PlayerItemList.Items[i] : null;
+                        var item2 = i < character2.PlayerItemList.Items.Count ? character2.PlayerItemList.Items[i] : null;
+
+                        if (item1 == null && item2 == null)
+                            continue;
+
+                        Console.WriteLine($"Slot {i}:");
+                        Console.WriteLine($"  character1: {(item1 != null ? item1.Code + $"({item1.TotalNumberOfSockets}) + ({item1.Quality})" : "empty")}");
+                        Console.WriteLine($"  character2: {(item2 != null ? item2.Code + $"({item2.TotalNumberOfSockets}) + ({item2.Quality})" : "empty")}");
+                    }
+                    Console.WriteLine($"Items A: {character1.PlayerItemList.Items.Count}");
+                    Console.WriteLine($"Items B: {character2.PlayerItemList.Items.Count}");
                 }
 
+                if (Globals.printOutOffsets)
+                {
+                    byte[] character1Bytes = File.ReadAllBytes(savePath);
+                    byte[] character2Bytes = File.ReadAllBytes(savePath2);
+                    using (var writer = new StreamWriter("diffs.csv"))
+                    {
+                        writer.WriteLine("Offset,Character1,Character2"); // header line
+                        for (int i = 0; i < Math.Min(character1Bytes.Length, character2Bytes.Length); i++)
+                        {
+                            if (character1Bytes[i] != character2Bytes[i])
+                            {
+                                writer.WriteLine($"{i:X4},{character1Bytes[i]:X2},{character2Bytes[i]:X2}");
+                            }
+                        }
+                    }
+                    Console.WriteLine("Bytediffs with offsets written to diffs.csv in solution folder");
+                }
             }
             else
             {

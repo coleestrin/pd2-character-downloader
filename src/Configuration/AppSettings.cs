@@ -17,9 +17,6 @@ namespace D2SLib.Configuration
 
         public const int MaxGold = 8000000;
         public const int CharacterGold = 1000000;
-        public const int ResistanceCharmValue = 30;
-        public const int AttributeCharmValue = 15;
-        public const int HealthCharmValue = 10000;
         public const int StackSize = 50;
         public const byte MaxItemLevel = 85;
 

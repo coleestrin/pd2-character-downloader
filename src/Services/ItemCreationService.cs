@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Windows.Markup;
@@ -31,22 +32,25 @@ namespace D2SLib.Services
                 FileIndex = CalculateFileIndex(apiItem.Unique),
                 Quality = (ItemQuality)apiItem.Quality.Id,
                 Armor = CalculateArmor(apiItem.Defense),
-                TotalNumberOfSockets = (byte)apiItem.SocketedCount,
+                TotalNumberOfSockets = (byte)apiItem.SocketCount,
                 Flags = flags,
                 StatLists = new List<ItemStatList> { new() { Stats = new List<ItemStat>() } }
             };
 
-            //if (newItem.Code == "7ga")
-            //{
-            //    var json = JsonSerializer.Serialize(apiItem, new JsonSerializerOptions
-            //    {
-            //        WriteIndented = true // makes it pretty-printed
-            //    });
-            //    Console.WriteLine("Created item:");
-            //    Console.WriteLine(json);
-            //}
+            if (newItem.Code == "usk")
+            {
+                var json = JsonSerializer.Serialize(apiItem, new JsonSerializerOptions
+                {
+                    WriteIndented = true // makes it pretty-printed
+                    
+                });
+                Console.WriteLine("Created item:");
+                Console.WriteLine(json);
+                Console.WriteLine($"{apiItem.Socketed.Count}");
+                newItem.TotalNumberOfSockets = (byte)3;
+            }
 
-
+            //AddSocketsToItem(newItem);
             AddModifiersToItem(newItem, apiItem.Modifiers);
             return newItem;
         }
@@ -152,6 +156,7 @@ namespace D2SLib.Services
         //        StatLists = new List<ItemStatList> { new() { Stats = new List<ItemStat>() } }
         //    };
         //}
+
         public Item CreateSimpleItem(byte x, byte y, byte page, string code, ushort quantity)
         {
             var flags = new BitArray(32);
@@ -203,6 +208,7 @@ namespace D2SLib.Services
 
         //    return item;
         //}
+
         public Item CreateMagicCharm(byte x, byte y, byte page, string code, List<ItemStat> stats)
         {
             var flags = new BitArray(32);
@@ -496,19 +502,14 @@ namespace D2SLib.Services
             }
         }
 
-        //private void AddSocketsToItem(Item item, D2ItemModifier modifier)
+        //private void AddSocketsToItem(Item item)
         //{
         //    if (item.IsSocketed)
         //    {
         //        if (item.TotalNumberOfSockets > 0)
         //        {
         //            Console.WriteLine("Adding sockets to item...", item.TotalNumberOfSockets);
-        //            item.StatLists[0].Stats.Add(new ItemStat
-        //            {
-
-        //                Stat = "item_numsockets_textonly",
-        //                Value = (int)modifier.Values[0]
-        //            });
+        //            item.TotalNumberOfSockets = item.Socketed.Count;
         //        }
         //    }
         //}

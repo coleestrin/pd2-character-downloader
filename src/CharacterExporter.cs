@@ -211,6 +211,7 @@ namespace D2SLib
                 //Console.WriteLine($"Total mana: {TotalMana}");
                 //Console.WriteLine($"---------------------STATS---------------------------");
 
+
                 // Set gold and stats
                 character.Attributes.Stats["goldbank"] = AppSettings.MaxGold;
                 character.Attributes.Stats["vitality"] = apiCharacterData.Character.Attributes.Vitality;

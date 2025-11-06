@@ -22,7 +22,6 @@ namespace D2SLib.Services
             FillStashWithCraftingMaterials(character);
             FillStashWithMaps(character);
             FillStashWithEndgameMaps(character);
-            AddMagicCharms(character);
         }
 
         private void FillInventoryWithUtilities(D2S character)
@@ -155,36 +154,6 @@ namespace D2SLib.Services
 
             AddItem(character, 8, 11, AppSettings.StashPage, "rrra", AppSettings.StackSize);
             AddItem(character, 9, 11, AppSettings.StashPage, "irra", AppSettings.StackSize);
-        }
-
-        private void AddMagicCharms(D2S character)
-        {
-            // Resistance and attribute charm
-            var resistanceStats = new List<ItemStat>
-            {
-                new() { Stat = "fireresist", Value = AppSettings.ResistanceCharmValue },
-                new() { Stat = "coldresist", Value = AppSettings.ResistanceCharmValue },
-                new() { Stat = "lightresist", Value = AppSettings.ResistanceCharmValue },
-                new() { Stat = "poisonresist", Value = AppSettings.ResistanceCharmValue },
-                new() { Stat = "strength", Value = AppSettings.AttributeCharmValue },
-                new() { Stat = "vitality", Value = AppSettings.AttributeCharmValue },
-                new() { Stat = "energy", Value = AppSettings.AttributeCharmValue },
-                new() { Stat = "dexterity", Value = AppSettings.AttributeCharmValue }
-            };
-
-            var resistanceCharm = _itemCreationService.CreateMagicCharm(7, 4, AppSettings.StashPage, "cm1", resistanceStats);
-            character.PlayerItemList.Items.Add(resistanceCharm);
-            character.PlayerItemList.Count++;
-
-            // Health charm
-            var healthStats = new List<ItemStat>
-            {
-                new() { Stat = "maxhp", Value = AppSettings.HealthCharmValue }
-            };
-
-            var healthCharm = _itemCreationService.CreateMagicCharm(8, 4, AppSettings.StashPage, "cm1", healthStats);
-            character.PlayerItemList.Items.Add(healthCharm);
-            character.PlayerItemList.Count++;
         }
 
         private void AddItem(D2S character, byte x, byte y, byte page, string code, ushort quantity, bool belt = false)

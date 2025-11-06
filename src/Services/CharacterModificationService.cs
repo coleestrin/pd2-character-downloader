@@ -1,8 +1,9 @@
-using System;
-using System.Reflection;
 using D2SLib.Configuration;
 using D2SLib.Model.Api;
 using D2SLib.Model.Save;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Reflection;
 
 namespace D2SLib.Services
 {
@@ -40,15 +41,12 @@ namespace D2SLib.Services
                 { 
                     CompleteActQuests(act);                                       
                 }
-                
             }
-            character.Quests.Normal.ActV.PrisonOfIce.RewardGranted = false;
-            character.Quests.Normal.ActV.PrisonOfIce.RewardPending = true;
-            character.Quests.Nightmare.ActV.PrisonOfIce.RewardGranted = false;
-            character.Quests.Nightmare.ActV.PrisonOfIce.RewardPending = true;
-            character.Quests.Hell.ActV.PrisonOfIce.RewardGranted = false;
-            character.Quests.Hell.ActV.PrisonOfIce.RewardPending = true;
+            character.Quests.Normal.ActV.PrisonOfIce.Custom3 = true;
+            character.Quests.Nightmare.ActV.PrisonOfIce.Custom3 = true;
+            character.Quests.Hell.ActV.PrisonOfIce.Custom3 = true;
         }
+
 
         public void UnlockAllWaypoints(D2S character)
         {
