@@ -37,103 +37,97 @@ namespace D2SLib.Services
                 StatLists = new List<ItemStatList> { new() { Stats = new List<ItemStat>() } }
             };
 
-            if (newItem.Code == "usk")
-            {
-                var json = JsonSerializer.Serialize(apiItem, new JsonSerializerOptions
-                {
-                    WriteIndented = true // makes it pretty-printed
+            //if (newItem.Code == "usk")
+            //{
+            //    var json = JsonSerializer.Serialize(apiItem, new JsonSerializerOptions
+            //    {
+            //        WriteIndented = true // makes it pretty-printed
                     
-                });
-                Console.WriteLine("Created item:");
-                Console.WriteLine(json);
-                Console.WriteLine($"{apiItem.Socketed.Count}");
-                newItem.TotalNumberOfSockets = (byte)3;
-            }
+            //    });
+            //    Console.WriteLine("Created item:");
+            //    Console.WriteLine(json);
+            //    Console.WriteLine($"{apiItem.Socketed.Count}");
+            //    newItem.TotalNumberOfSockets = (byte)3;
+            //}
 
             //AddSocketsToItem(newItem);
             AddModifiersToItem(newItem, apiItem.Modifiers);
             return newItem;
         }
 
-        //public (int life, int lifeperlevel, int vitality, int vitalityperlevel, int percentmaxlife, int mana, int manaperlevel, int energy, int energyperlevel, int percentmaxmana) CalculateTotals(IEnumerable<Item> items)
-        //{
-        //    int life = 0;
-        //    int lifeperlevel = 0;
-        //    int vitality = 0;
-        //    int vitalityperlevel = 0;
-        //    int percentmaxlife = 0;
-        //    int mana = 0;
-        //    int manaperlevel = 0;
-        //    int energy = 0;
-        //    int energyperlevel = 0;
-        //    int percentmaxmana = 0;
+        public (int life, int lifeperlevel, int vitality, int vitalityperlevel, int percentmaxlife, int mana, int manaperlevel, int energy, int energyperlevel, int percentmaxmana) CalculateTotals(IEnumerable<Item> items)
+        {
+            int life = 0;
+            int lifeperlevel = 0;
+            int vitality = 0;
+            int vitalityperlevel = 0;
+            int percentmaxlife = 0;
+            int mana = 0;
+            int manaperlevel = 0;
+            int energy = 0;
+            int energyperlevel = 0;
+            int percentmaxmana = 0;
 
-        //    foreach (var item in items)
-        //    {
-        //        if (item?.StatLists == null)
-        //            continue;
+            foreach (var item in items)
+            {
+                if (item?.StatLists == null)
+                    continue;
 
-        //        foreach (var statList in item.StatLists)
-        //        {
-        //            if (statList?.Stats == null)
-        //                continue;
+                foreach (var statList in item.StatLists)
+                {
+                    if (statList?.Stats == null)
+                        continue;
 
-        //            foreach (var stat in statList.Stats)
-        //            {
-        //                if (stat.Stat.Equals("maxhp", StringComparison.OrdinalIgnoreCase))
-        //                {
-        //                    life += stat.Value;
-        //                }
+                    foreach (var stat in statList.Stats)
+                    {
+                        switch (stat.Stat.ToLowerInvariant())
+                        {
+                            case "maxhp":
+                                life += stat.Value;
+                                break;
 
-        //                if (stat.Stat.Equals("item_hp_perlevel", StringComparison.OrdinalIgnoreCase)) 
-        //                {
-        //                    lifeperlevel += stat.Value / 8;
-        //                }
+                            case "item_hp_perlevel":
+                                lifeperlevel += stat.Value / 8;
+                                break;
 
-        //                if (stat.Stat.Equals("vitality", StringComparison.OrdinalIgnoreCase))
-        //                {
-        //                    vitality += stat.Value;                           
-        //                }
+                            case "vitality":
+                                vitality += stat.Value;
+                                break;
 
-        //                if (stat.Stat.Equals("item_vitality_perlevel", StringComparison.OrdinalIgnoreCase))
-        //                {
-        //                    vitalityperlevel += stat.Value / 8;
-        //                }
+                            case "item_vitality_perlevel":
+                                vitalityperlevel += stat.Value / 8;
+                                break;
 
-        //                if (stat.Stat.Equals("item_maxhp_percent", StringComparison.OrdinalIgnoreCase))
-        //                {
-        //                    percentmaxlife += stat.Value;// Add other relevant stats if needed
-        //                }
+                            case "item_maxhp_percent":
+                                percentmaxlife += stat.Value;
+                                break;
 
-        //                if (stat.Stat.Equals("maxmana", StringComparison.OrdinalIgnoreCase))
-        //                {
-        //                    mana += stat.Value;
-        //                }
+                            case "maxmana":
+                                mana += stat.Value;
+                                break;
 
-        //                if (stat.Stat.Equals("item_mana_perlevel", StringComparison.OrdinalIgnoreCase))
-        //                {
-        //                    manaperlevel += stat.Value / 8;
-        //                }
+                            case "item_mana_perlevel":
+                                manaperlevel += stat.Value / 8;
+                                break;
 
-        //                if (stat.Stat.Equals("energy", StringComparison.OrdinalIgnoreCase))
-        //                {
-        //                    energy += stat.Value;
-        //                }
+                            case "energy":
+                                energy += stat.Value;
+                                break;
 
-        //                if (stat.Stat.Equals("item_energy_perlevel", StringComparison.OrdinalIgnoreCase))
-        //                {
-        //                    energyperlevel += stat.Value / 8;
-        //                }
+                            case "item_energy_perlevel":
+                                energyperlevel += stat.Value / 8;
+                                break;
 
-        //                if (stat.Stat.Equals("item_maxmana_percent", StringComparison.OrdinalIgnoreCase))
-        //                {
-        //                    percentmaxmana += stat.Value; // Add other relevant stats if needed
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return (life, lifeperlevel, vitality, vitalityperlevel, percentmaxlife, mana, manaperlevel, energy, energyperlevel, percentmaxmana);
-        //}
+                            case "item_maxmana_percent":
+                                percentmaxmana += stat.Value;
+                                break;
+                        }
+                    }
+
+                }
+            }
+            return (life, lifeperlevel, vitality, vitalityperlevel, percentmaxlife, mana, manaperlevel, energy, energyperlevel, percentmaxmana);
+        }
 
         //public Item CreateSimpleItem(byte x, byte y, byte page, string code, ushort quantity)
         //{

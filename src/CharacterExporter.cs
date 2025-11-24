@@ -88,19 +88,19 @@ namespace D2SLib
                     character.Status.IsHardcore = true;
                 }
 
-                // A list of all items for total life and mana calculation
-                //List<Item> allItems = new List<Item>();
+                 //A list of all items for total life and mana calculation
+                List<Item> allItems = new List<Item>();
 
                 ////Loop it
-                //foreach (var apiItem in apiCharacterData.Items)
-                //{
-                //    var newItem = _itemService.CreateItemFromApiData(apiItem);
-                //    if (newItem != null)
-                //        allItems.Add(newItem);
-                //}
+                foreach (var apiItem in apiCharacterData.Items)
+                {
+                    var newItem = _itemService.CreateItemFromApiData(apiItem);
+                    if (newItem != null)
+                        allItems.Add(newItem);
+                }
 
                 // Calculate totals for substraction on stats
-                //var totals = _itemService.CalculateTotals(allItems);
+                var totals = _itemService.CalculateTotals(allItems);
 
                 int baselife = 0;
                 int basemana = 0;
@@ -176,40 +176,40 @@ namespace D2SLib
                 }
 
                 int lifeFromAttributeVitality = (int)Math.Round((apiCharacterData.Character.Attributes.Vitality - basevit) * vitalitycoeff);
-                //int LifeFromVitalityOnItems = (int)Math.Round((totals.vitality + (totals.vitalityperlevel * character.Level)) * vitalitycoeff);
-                //int LifeFromPercentMaxLife = (int)Math.Round((baselife + lifeFromAttributeVitality + totals.life + (totals.lifeperlevel * character.Level)) * (totals.percentmaxlife / 100.0));
-                //int TotalLife = baselife + lifeFromAttributeVitality + LifeFromVitalityOnItems + totals.life + (totals.lifeperlevel * character.Level) + LifeFromPercentMaxLife;
+                int LifeFromVitalityOnItems = (int)Math.Round((totals.vitality + (totals.vitalityperlevel * character.Level)) * vitalitycoeff);
+                int LifeFromPercentMaxLife = (int)Math.Round((baselife + lifeFromAttributeVitality + totals.life + (totals.lifeperlevel * character.Level)) * (totals.percentmaxlife / 100.0));
+                int TotalLife = baselife + lifeFromAttributeVitality + LifeFromVitalityOnItems + totals.life + (totals.lifeperlevel * character.Level) + LifeFromPercentMaxLife;
                 int newTotalLife = baselife + lifeFromAttributeVitality;
 
                 int ManaFromAttributeEnergy = (int)Math.Round((apiCharacterData.Character.Attributes.Energy - baseenergy) * energycoeff);
-                //int ManaFromEnergyOnItems = (int)Math.Round((totals.energy + (totals.energyperlevel * character.Level)) * energycoeff);
-                //int ManaFromPercentMaxMana = (int)Math.Round((basemana + ManaFromAttributeEnergy + totals.mana + (totals.manaperlevel * character.Level)) * (totals.percentmaxmana / 100.0));
-                //int TotalMana = basemana + ManaFromAttributeEnergy + ManaFromEnergyOnItems + totals.mana + (totals.manaperlevel * character.Level) + ManaFromPercentMaxMana;
+                int ManaFromEnergyOnItems = (int)Math.Round((totals.energy + (totals.energyperlevel * character.Level)) * energycoeff);
+                int ManaFromPercentMaxMana = (int)Math.Round((basemana + ManaFromAttributeEnergy + totals.mana + (totals.manaperlevel * character.Level)) * (totals.percentmaxmana / 100.0));
+                int TotalMana = basemana + ManaFromAttributeEnergy + ManaFromEnergyOnItems + totals.mana + (totals.manaperlevel * character.Level) + ManaFromPercentMaxMana;
                 int newTotalMana = basemana + ManaFromAttributeEnergy;
 
-                //Console.WriteLine($"---------------------LIFE---------------------------");
-                //Console.WriteLine($"Total +Life from all items: {totals.life}");
-                //Console.WriteLine($"Total +Life per level from all items: {totals.lifeperlevel * character.Level}");
-                //Console.WriteLine($"Total +Vitality from all items: {totals.vitality}");
-                //Console.WriteLine($"Total +Vitality per level from items: {totals.vitalityperlevel * character.Level}"); 
-                //Console.WriteLine($"Total +% Maximum Life from all items: {totals.percentmaxlife}");
-                //Console.WriteLine($"Total Baselife: {baselife}");               
-                //Console.WriteLine($"Life from attribute Vitality: {lifeFromAttributeVitality}");
-                //Console.WriteLine($"Life from Vitality On Items: {LifeFromVitalityOnItems}");
-                //Console.WriteLine($"Life from percent Max Life: {LifeFromPercentMaxLife}");               
-                //Console.WriteLine($"Total life: {TotalLife}");
-                //Console.WriteLine($"---------------------MANA---------------------------");
-                //Console.WriteLine($"Total +Mana from all items: {totals.mana}");
-                //Console.WriteLine($"Total +Mana per level from all items: {totals.manaperlevel * character.Level}");
-                //Console.WriteLine($"Total +Energy from all items: {totals.energy}");
-                //Console.WriteLine($"Total +Energy per level from all items: {totals.energyperlevel * character.Level}");
-                //Console.WriteLine($"Total +% Maximum Mana from all items: {totals.percentmaxmana}");
-                //Console.WriteLine($"Total Basemana: {basemana}");
-                //Console.WriteLine($"Mana from attribute Energy: {ManaFromAttributeEnergy}");
-                //Console.WriteLine($"Mana from Energy on Items: {ManaFromEnergyOnItems}");
-                //Console.WriteLine($"Mana from percent Max Mana: {ManaFromPercentMaxMana}");
-                //Console.WriteLine($"Total mana: {TotalMana}");
-                //Console.WriteLine($"---------------------STATS---------------------------");
+                Console.WriteLine($"---------------------LIFE---------------------------");
+                Console.WriteLine($"Total +Life from all items: {totals.life}");
+                Console.WriteLine($"Total +Life per level from all items: {totals.lifeperlevel * character.Level}");
+                Console.WriteLine($"Total +Vitality from all items: {totals.vitality}");
+                Console.WriteLine($"Total +Vitality per level from items: {totals.vitalityperlevel * character.Level}");
+                Console.WriteLine($"Total +% Maximum Life from all items: {totals.percentmaxlife}");
+                Console.WriteLine($"Total Baselife: {baselife}");
+                Console.WriteLine($"Life from attribute Vitality: {lifeFromAttributeVitality}");
+                Console.WriteLine($"Life from Vitality On Items: {LifeFromVitalityOnItems}");
+                Console.WriteLine($"Life from percent Max Life: {LifeFromPercentMaxLife}");
+                Console.WriteLine($"Total life: {TotalLife}");
+                Console.WriteLine($"---------------------MANA---------------------------");
+                Console.WriteLine($"Total +Mana from all items: {totals.mana}");
+                Console.WriteLine($"Total +Mana per level from all items: {totals.manaperlevel * character.Level}");
+                Console.WriteLine($"Total +Energy from all items: {totals.energy}");
+                Console.WriteLine($"Total +Energy per level from all items: {totals.energyperlevel * character.Level}");
+                Console.WriteLine($"Total +% Maximum Mana from all items: {totals.percentmaxmana}");
+                Console.WriteLine($"Total Basemana: {basemana}");
+                Console.WriteLine($"Mana from attribute Energy: {ManaFromAttributeEnergy}");
+                Console.WriteLine($"Mana from Energy on Items: {ManaFromEnergyOnItems}");
+                Console.WriteLine($"Mana from percent Max Mana: {ManaFromPercentMaxMana}");
+                Console.WriteLine($"Total mana: {TotalMana}");
+                Console.WriteLine($"---------------------STATS---------------------------");
 
 
                 // Set gold and stats
