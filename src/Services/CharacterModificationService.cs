@@ -40,6 +40,9 @@ namespace D2SLib.Services
                     CompleteActQuests(act);
                 }
             }
+            character.Quests.Normal.ActV.PrisonOfIce.Custom3 = true;
+            character.Quests.Nightmare.ActV.PrisonOfIce.Custom3 = true;
+            character.Quests.Hell.ActV.PrisonOfIce.Custom3 = true;
         }
 
         public void UnlockAllWaypoints(D2S character)
