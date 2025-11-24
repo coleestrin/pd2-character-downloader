@@ -65,7 +65,6 @@ namespace D2SLib
 
         private static void RunDebugMode()
         {
-            //Console.Write("Enter path to .d2s save file: ");
             string savePath;
             if (Globals.savePath == null)
             {
@@ -79,7 +78,7 @@ namespace D2SLib
 
             if (string.IsNullOrWhiteSpace(savePath) || !File.Exists(savePath))
             {
-                Console.WriteLine("Invalid or missing file path.");
+                Console.WriteLine("Invalid or missing save file path.");
                 return;
             }
 
@@ -89,7 +88,7 @@ namespace D2SLib
 
                 if (string.IsNullOrWhiteSpace(savePath2) || !File.Exists(savePath2))
                 {
-                    Console.Write("Enter path to second .d2s save file for comparison or turn off comparisonboolean in Globals");
+                    Console.Write("Enter path to second .d2s save file for comparison or turn off printoutItemComparison in Globals.cs");
                     return;
                 }
 
