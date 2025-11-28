@@ -17,6 +17,9 @@ namespace D2SLib.Model.Api
         [JsonProperty("is_new")]
         public bool IsNew { get; set; }
 
+        [JsonProperty("is_ethereal")]
+        public bool IsEthereal { get; set; }
+
         [JsonProperty("base")]
         public D2ItemBase Base { get; set; }
 
