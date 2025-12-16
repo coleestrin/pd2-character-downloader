@@ -145,7 +145,8 @@ namespace D2SLib.Services
                 ("uba", 3, 9), ("uba", 4, 9), ("uba", 5, 9),
                 ("toa", 6, 9), ("toa", 7, 9), ("toa", 8, 9),
                 ("ubtm", 0, 10), ("ubtm", 1, 10), ("ubtm", 2, 10),
-                ("dcma", 3, 10), ("dcma", 4, 10), ("dcma", 5, 10)
+                ("dcma", 3, 10), ("dcma", 4, 10), ("dcma", 5, 10),
+                ("luca", 6, 10), ("luca", 7, 10), ("luca", 8, 10)
             };
 
             foreach (var (code, x, y) in endgameMaps)

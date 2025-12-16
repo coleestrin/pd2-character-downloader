@@ -163,9 +163,7 @@ namespace D2SLib
                 int manaFromAttributeEnergy = (int)Math.Round((apiCharacterData.Character.Attributes.Energy - baseEnergy) * energyCoeff);
 
                 int totalLife = baseLife + lifeFromAttributeVitality;
-
                 int totalMana = baseMana + manaFromAttributeEnergy;
-
 
                 // Set gold and stats
                 character.Attributes.Stats["goldbank"] = AppSettings.MaxGold;
